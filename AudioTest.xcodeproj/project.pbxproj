@@ -83,13 +83,13 @@
 		B6A6896C1FB4BF0800D95087 /* AudioTest */ = {
 			isa = PBXGroup;
 			children = (
-				B6A6896D1FB4BF0800D95087 /* AppDelegate.swift */,
+				B6A689901FB4C17400D95087 /* AudioUnit.swift */,
 				B6A6896F1FB4BF0800D95087 /* ViewController.swift */,
 				B6A689711FB4BF0800D95087 /* Main.storyboard */,
 				B6A689741FB4BF0800D95087 /* Assets.xcassets */,
 				B6A689761FB4BF0800D95087 /* LaunchScreen.storyboard */,
 				B6A689791FB4BF0800D95087 /* Info.plist */,
-				B6A689901FB4C17400D95087 /* AudioUnit.swift */,
+				B6A6896D1FB4BF0800D95087 /* AppDelegate.swift */,
 			);
 			path = AudioTest;
 			sourceTree = "<group>";

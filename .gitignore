@@ -1,0 +1,11 @@
+.DS_Store
+
+xcuserdata/
+
+
+# CI Pipeline ignores
+fastlane/mentos
+# accidentally created report.xml file
+fastlane/report.xml
+# johnny local dev scripts
+jeffry.*
