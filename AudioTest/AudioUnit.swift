@@ -149,7 +149,7 @@ private func renderCallbackSquare(inRefCon: UnsafeMutableRawPointer,
     let abl = UnsafeMutableAudioBufferListPointer(ioData)
     let buffer = abl![0]
     let pointer: UnsafeMutableBufferPointer<Float32> = UnsafeMutableBufferPointer(buffer)
-    
+    print("square callback: frames: \(inNumberFrames)")
     var pointerIndex = 0
     for frame in 0..<inNumberFrames {
         pointerIndex = pointer.startIndex + Int(frame)

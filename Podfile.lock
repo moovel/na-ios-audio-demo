@@ -1,0 +1,12 @@
+PODS:
+  - RealtimeWatchdog (1.0.1)
+
+DEPENDENCIES:
+  - RealtimeWatchdog
+
+SPEC CHECKSUMS:
+  RealtimeWatchdog: 972e1bf69df2074b5e2f1cb458cb71125286b040
+
+PODFILE CHECKSUM: 2ea44351843770b904f4e0006af56925bcf3d890
+
+COCOAPODS: 1.3.1

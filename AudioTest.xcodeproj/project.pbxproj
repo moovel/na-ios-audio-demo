@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0F9260D16CC3FCA02E1020EE /* Pods_AudioTestTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A63A0644E046898347870864 /* Pods_AudioTestTests.framework */; };
+		3E8FCD9F594FFA97B82FBEEE /* Pods_AudioTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E04BBDB52121FD64795FB3EC /* Pods_AudioTest.framework */; };
 		B6A6896E1FB4BF0800D95087 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A6896D1FB4BF0800D95087 /* AppDelegate.swift */; };
 		B6A689701FB4BF0800D95087 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A6896F1FB4BF0800D95087 /* ViewController.swift */; };
 		B6A689731FB4BF0800D95087 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6A689711FB4BF0800D95087 /* Main.storyboard */; };
@@ -27,6 +29,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1A401399982BB26272B0587A /* Pods-AudioTest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AudioTest.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AudioTest/Pods-AudioTest.debug.xcconfig"; sourceTree = "<group>"; };
+		3AD0194498C68FE9EA399C1C /* Pods-AudioTestTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AudioTestTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-AudioTestTests/Pods-AudioTestTests.release.xcconfig"; sourceTree = "<group>"; };
+		444CFB06284035CA99B043B3 /* Pods-AudioTest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AudioTest.release.xcconfig"; path = "Pods/Target Support Files/Pods-AudioTest/Pods-AudioTest.release.xcconfig"; sourceTree = "<group>"; };
+		A63A0644E046898347870864 /* Pods_AudioTestTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AudioTestTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6A6896A1FB4BF0800D95087 /* AudioTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AudioTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6A6896D1FB4BF0800D95087 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B6A6896F1FB4BF0800D95087 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -41,6 +47,8 @@
 		B6A6898F1FB4C03E00D95087 /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = System/Library/Frameworks/AudioUnit.framework; sourceTree = SDKROOT; };
 		B6A689901FB4C17400D95087 /* AudioUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioUnit.swift; sourceTree = "<group>"; };
 		B6A689921FB4C1B200D95087 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
+		E04BBDB52121FD64795FB3EC /* Pods_AudioTest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AudioTest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F9133B5EC9BC683B714E0934 /* Pods-AudioTestTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AudioTestTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AudioTestTests/Pods-AudioTestTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -48,6 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3E8FCD9F594FFA97B82FBEEE /* Pods_AudioTest.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -55,6 +64,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0F9260D16CC3FCA02E1020EE /* Pods_AudioTestTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -68,6 +78,7 @@
 				B6A689811FB4BF0800D95087 /* AudioTestTests */,
 				B6A6896B1FB4BF0800D95087 /* Products */,
 				B6A6898D1FB4C03E00D95087 /* Frameworks */,
+				E4AF39B4F3E25B9CAE339CA5 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -109,8 +120,21 @@
 				B6A689921FB4C1B200D95087 /* CoreAudio.framework */,
 				B6A6898E1FB4C03E00D95087 /* AudioToolbox.framework */,
 				B6A6898F1FB4C03E00D95087 /* AudioUnit.framework */,
+				E04BBDB52121FD64795FB3EC /* Pods_AudioTest.framework */,
+				A63A0644E046898347870864 /* Pods_AudioTestTests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E4AF39B4F3E25B9CAE339CA5 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				1A401399982BB26272B0587A /* Pods-AudioTest.debug.xcconfig */,
+				444CFB06284035CA99B043B3 /* Pods-AudioTest.release.xcconfig */,
+				F9133B5EC9BC683B714E0934 /* Pods-AudioTestTests.debug.xcconfig */,
+				3AD0194498C68FE9EA399C1C /* Pods-AudioTestTests.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -120,9 +144,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B6A689871FB4BF0800D95087 /* Build configuration list for PBXNativeTarget "AudioTest" */;
 			buildPhases = (
+				F871AF35FCD6FC37C78B7868 /* [CP] Check Pods Manifest.lock */,
 				B6A689661FB4BF0800D95087 /* Sources */,
 				B6A689671FB4BF0800D95087 /* Frameworks */,
 				B6A689681FB4BF0800D95087 /* Resources */,
+				06905607DEE1ECCA61158D1F /* [CP] Embed Pods Frameworks */,
+				09400DE0204A91D76078FF87 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -137,9 +164,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B6A6898A1FB4BF0800D95087 /* Build configuration list for PBXNativeTarget "AudioTestTests" */;
 			buildPhases = (
+				DA44F5DB158F16B4FC8ED995 /* [CP] Check Pods Manifest.lock */,
 				B6A6897A1FB4BF0800D95087 /* Sources */,
 				B6A6897B1FB4BF0800D95087 /* Frameworks */,
 				B6A6897C1FB4BF0800D95087 /* Resources */,
+				B2AAE78DC14EE4F9F28CEBD0 /* [CP] Embed Pods Frameworks */,
+				4D7D2D73FE19B7B863748751 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -210,6 +240,108 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		06905607DEE1ECCA61158D1F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AudioTest/Pods-AudioTest-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		09400DE0204A91D76078FF87 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AudioTest/Pods-AudioTest-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4D7D2D73FE19B7B863748751 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AudioTestTests/Pods-AudioTestTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B2AAE78DC14EE4F9F28CEBD0 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-AudioTestTests/Pods-AudioTestTests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/RealtimeWatchdog/RealtimeWatchdog.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealtimeWatchdog.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AudioTestTests/Pods-AudioTestTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DA44F5DB158F16B4FC8ED995 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-AudioTestTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F871AF35FCD6FC37C78B7868 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-AudioTest-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		B6A689661FB4BF0800D95087 /* Sources */ = {
@@ -369,6 +501,7 @@
 		};
 		B6A689881FB4BF0800D95087 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1A401399982BB26272B0587A /* Pods-AudioTest.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -385,6 +518,7 @@
 		};
 		B6A689891FB4BF0800D95087 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 444CFB06284035CA99B043B3 /* Pods-AudioTest.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -401,6 +535,7 @@
 		};
 		B6A6898B1FB4BF0800D95087 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F9133B5EC9BC683B714E0934 /* Pods-AudioTestTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -417,6 +552,7 @@
 		};
 		B6A6898C1FB4BF0800D95087 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3AD0194498C68FE9EA399C1C /* Pods-AudioTestTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
