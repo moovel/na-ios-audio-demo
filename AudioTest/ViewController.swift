@@ -42,6 +42,8 @@ class ViewController: UIViewController {
             toneGenerator = ToneGenerator(waveType: .sin)
         case 1:
             toneGenerator = ToneGenerator(waveType: .square)
+        case 2:
+            toneGenerator = ToneGenerator(waveType: .sinInC)
         default:
             assert(false, "unexpected segment index")
         }

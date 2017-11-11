@@ -12,7 +12,7 @@ import AudioUnit
 import CoreAudio
 
 enum WaveType {
-    case sin,square
+    case sin,square,sinInC
 }
 
 class ToneGenerator {
@@ -49,8 +49,14 @@ class ToneGenerator {
         assert(err == noErr, "AudioComponentInstanceNew failed")
         
         var renderer: AudioToolbox.AURenderCallback = renderCallbackSin
-        if waveType == .sin {
-            // do nothing, already set
+        var inputProcRef: UnsafeMutableRawPointer? = nil
+        if waveType == .sinInC {
+            inputProcRef = UnsafeMutableRawPointer(&info)
+            info.sampleRate = sampleRate
+            info.amplitude = amplitude
+            info.frequency = frequency
+            info.theta = 0
+            renderer = renderCallbackSinInC
         } else if waveType == .square {
             renderer = renderCallbackSquare
         }
@@ -58,7 +64,7 @@ class ToneGenerator {
         
         // Set the render callback as the input for our audio unit:
         var renderCallbackStruct = AURenderCallbackStruct(inputProc: renderer,
-                                                          inputProcRefCon: nil)
+                                                          inputProcRefCon: inputProcRef)
         err = AudioUnitSetProperty(toneUnit!,
                                    kAudioUnitProperty_SetRenderCallback,
                                    kAudioUnitScope_Input,
@@ -102,6 +108,17 @@ class ToneGenerator {
     }
     
 }
+// MARK: C AudioUnit callback wrapper
+// this delegates to a C function, but we have this swift wrapper to make the Audio callback protocol happy
+private func renderCallbackSinInC(inRefCon: UnsafeMutableRawPointer,
+                               ioActionFlags: UnsafeMutablePointer<AudioUnitRenderActionFlags>,
+                               inTimeStamp: UnsafePointer<AudioTimeStamp>,
+                               inBusNumber: UInt32,
+                               inNumberFrames: UInt32,
+                               ioData: UnsafeMutablePointer<AudioBufferList>?) -> OSStatus {
+   return RenderTone(inRefCon, ioActionFlags, inTimeStamp, inBusNumber, inNumberFrames, ioData)
+}
+
 
 // MARK: Sin Wave
 // Fixed values used for sin wave and square wave
@@ -149,7 +166,6 @@ private func renderCallbackSquare(inRefCon: UnsafeMutableRawPointer,
     let abl = UnsafeMutableAudioBufferListPointer(ioData)
     let buffer = abl![0]
     let pointer: UnsafeMutableBufferPointer<Float32> = UnsafeMutableBufferPointer(buffer)
-    print("square callback: frames: \(inNumberFrames)")
     var pointerIndex = 0
     for frame in 0..<inNumberFrames {
         pointerIndex = pointer.startIndex + Int(frame)

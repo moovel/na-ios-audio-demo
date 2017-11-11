@@ -18,11 +18,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="n2k-3O-l8w">
-                                <rect key="frame" x="94.5" y="426" width="185" height="29"/>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="n2k-3O-l8w">
+                                <rect key="frame" x="27" y="426" width="332" height="29"/>
                                 <segments>
-                                    <segment title="Sin wave"/>
+                                    <segment title="Sine wave"/>
                                     <segment title="Square wave"/>
+                                    <segment title="Sine in C"/>
                                 </segments>
                                 <connections>
                                     <action selector="waveSelectionChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="3V9-gh-IlC"/>
