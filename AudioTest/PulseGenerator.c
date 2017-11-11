@@ -44,7 +44,8 @@ void setFreq(double newFreq){
     freq_ = newFreq;
 }
 
-void setWidthSweep(double widthLow, double widthHigh, double seconds){
+void setWidthSweep(double widthLow, double widthHigh, double seconds, double width) {
+    width_ = width;
     widthHigh_ = widthHigh;
     widthLow_ = widthLow;
     sweepScaler_ = fabs(widthHigh - widthLow) / seconds * sampleRate_;
@@ -64,8 +65,12 @@ void handleSweep(){
 }
 
 bool isOn(){
-    if(width_ == 1)return true;
-    if(width_ == 0)return false;
+    if(width_ == 1) {
+        return true;
+    }
+    if(width_ == 0) {
+        return false;
+    }
     if(widthIterator_ < sampleRate_ / freq_ * width_){
         widthIterator_ += 1;
         handleSweep();
@@ -81,11 +86,15 @@ bool isOn(){
     }
 }
 
+// this is the chewy center
 void render(float *buffer, int32_t channelStride, int32_t numFrames, double amplitude){
     int sampleIndex = 0;
     for(int i = 0; i < numFrames; i++){
-        if(isOn()) buffer[sampleIndex] = (float) (1 * amplitude_);
-        else buffer[sampleIndex] = (float) (0 * amplitude_);
+        if(isOn()) {
+            buffer[sampleIndex] = (float) (1 * amplitude_);
+        } else {
+            buffer[sampleIndex] = (float) (0 * amplitude_);
+        }
         sampleIndex += channelStride;
     }
 }
@@ -108,6 +117,10 @@ OSStatus RenderSquareWave(
     
     // Get the tone parameters out of the object
     SquareChannelInfo *channelInfo = (SquareChannelInfo *)inRefCon;
+    sampleRate_ = channelInfo->sampleRate;
+    freq_ = channelInfo->frequency;
+    amplitude_ = channelInfo->amplitude;
+    
     assert(ioData->mNumberBuffers == numChannels);
     
     for (size_t chan = 0; chan < numChannels; chan++) {

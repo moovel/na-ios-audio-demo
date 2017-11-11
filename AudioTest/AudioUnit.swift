@@ -48,8 +48,11 @@ class ToneGenerator {
         err = AudioComponentInstanceNew(defaultOutput!, &toneUnit)
         assert(err == noErr, "AudioComponentInstanceNew failed")
         
+        // the default sine generator in swift needs minimal setup
         var renderer: AudioToolbox.AURenderCallback = renderCallbackSin
         var inputProcRef: UnsafeMutableRawPointer? = nil
+        
+        // the audio unit generators in C need a data structure to be filled up and passed along
         if waveType == .sinInC {
             sineInfo.sampleRate = sampleRate
             sineInfo.amplitude = amplitude
@@ -59,11 +62,12 @@ class ToneGenerator {
             renderer = renderCallbackSinInC
         } else if waveType == .square {
             //renderer = renderCallbackSquare
+            setWidthSweep(0.1,0.9,5.0,0.5)
             squareInfo.sampleRate = sampleRate
             squareInfo.amplitude = amplitude
             squareInfo.frequency = frequency
             inputProcRef = UnsafeMutableRawPointer(&squareInfo)
-            renderer = renderCallbackSquare
+            renderer = renderCallbackSquareInC
         }
         
         
