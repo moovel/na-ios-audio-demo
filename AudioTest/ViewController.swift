@@ -10,7 +10,7 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    private var toneGenerator = ToneGenerator(waveType: .sin)
+    private var toneGenerator = ToneGenerator(waveType: .square)
     private var playing: Bool = false
     
     @IBOutlet weak var playButton: UIButton!
@@ -39,9 +39,9 @@ class ViewController: UIViewController {
         let index = waveSelector.selectedSegmentIndex
         switch index {
         case 0:
-            toneGenerator = ToneGenerator(waveType: .sin)
-        case 1:
             toneGenerator = ToneGenerator(waveType: .square)
+        case 1:
+            toneGenerator = ToneGenerator(waveType: .sin)
         case 2:
             toneGenerator = ToneGenerator(waveType: .sinInC)
         default:
@@ -57,6 +57,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        // get the wave type set up right off the bat
+        self.waveSelectionChanged(self)
     }
 
     override func didReceiveMemoryWarning() {

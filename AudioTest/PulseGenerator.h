@@ -1,17 +1,18 @@
 //
-//  CAudioUnit.h
+//  PulseGenerator.h
 //  AudioTest
 //
-//  Created by Dan Weston on 11/10/17.
+//  Created by Dan Weston on 11/11/17.
 //  Copyright © 2017 moovel-NA. All rights reserved.
 //
 
-#ifndef CAudioUnit_h
-#define CAudioUnit_h
+#ifndef PulseGenerator_h
+#define PulseGenerator_h
 
+#include <stdio.h>
 #include <AudioToolbox/AudioToolbox.h>
 
-OSStatus RenderSineWave(void *inRefCon,
+OSStatus RenderSquareWave(void *inRefCon,
                     AudioUnitRenderActionFlags   *ioActionFlags,
                     const AudioTimeStamp         *inTimeStamp,
                     UInt32                         inBusNumber,
@@ -22,9 +23,8 @@ typedef struct {
     float sampleRate;
     float frequency;
     float amplitude;
-    float theta;
-} SineChannelInfo;
+} SquareChannelInfo;
 
-SineChannelInfo sineInfo;
+SquareChannelInfo squareInfo;
 
-#endif /* CAudioUnit_h */
+#endif /* PulseGenerator_h */

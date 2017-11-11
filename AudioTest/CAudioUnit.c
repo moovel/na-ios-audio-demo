@@ -8,9 +8,9 @@
 
 #include "CAudioUnit.h"
 
-ChannelInfo info;
+SineChannelInfo sineInfo;
 
-OSStatus RenderTone(
+OSStatus RenderSineWave(
                     void *inRefCon,
                     AudioUnitRenderActionFlags   *ioActionFlags,
                     const AudioTimeStamp         *inTimeStamp,
@@ -23,10 +23,10 @@ OSStatus RenderTone(
     int numChannels = 1;
     
     // Get the tone parameters out of the object
-    ChannelInfo *channelInfo = (ChannelInfo *)inRefCon;
-   assert(ioData->mNumberBuffers == numChannels);
-    
-   for (size_t chan = 0; chan < numChannels; chan++) {
+    SineChannelInfo *channelInfo = (SineChannelInfo *)inRefCon;
+    assert(ioData->mNumberBuffers == numChannels);
+
+    for (size_t chan = 0; chan < numChannels; chan++) {
         double theta = channelInfo[chan].theta;
         double amplitude = channelInfo[chan].amplitude;
         double theta_increment = 2.0 * M_PI * channelInfo[chan].frequency / channelInfo[chan].sampleRate;
@@ -43,9 +43,9 @@ OSStatus RenderTone(
             }
         }
         
-        // Store the theta back in the view controller
+        // Store the theta back in the info structure
         channelInfo[chan].theta = theta;
     }
-    
+
     return noErr;
 }

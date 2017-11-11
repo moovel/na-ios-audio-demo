@@ -12,7 +12,7 @@ import AudioUnit
 import CoreAudio
 
 enum WaveType {
-    case sin,square,sinInC
+    case square,sin,sinInC
 }
 
 class ToneGenerator {
@@ -51,13 +51,18 @@ class ToneGenerator {
         var renderer: AudioToolbox.AURenderCallback = renderCallbackSin
         var inputProcRef: UnsafeMutableRawPointer? = nil
         if waveType == .sinInC {
-            inputProcRef = UnsafeMutableRawPointer(&info)
-            info.sampleRate = sampleRate
-            info.amplitude = amplitude
-            info.frequency = frequency
-            info.theta = 0
+            sineInfo.sampleRate = sampleRate
+            sineInfo.amplitude = amplitude
+            sineInfo.frequency = frequency
+            sineInfo.theta = 0
+            inputProcRef = UnsafeMutableRawPointer(&sineInfo)
             renderer = renderCallbackSinInC
         } else if waveType == .square {
+            //renderer = renderCallbackSquare
+            squareInfo.sampleRate = sampleRate
+            squareInfo.amplitude = amplitude
+            squareInfo.frequency = frequency
+            inputProcRef = UnsafeMutableRawPointer(&squareInfo)
             renderer = renderCallbackSquare
         }
         
@@ -108,25 +113,13 @@ class ToneGenerator {
     }
     
 }
-// MARK: C AudioUnit callback wrapper
-// this delegates to a C function, but we have this swift wrapper to make the Audio callback protocol happy
-private func renderCallbackSinInC(inRefCon: UnsafeMutableRawPointer,
-                               ioActionFlags: UnsafeMutablePointer<AudioUnitRenderActionFlags>,
-                               inTimeStamp: UnsafePointer<AudioTimeStamp>,
-                               inBusNumber: UInt32,
-                               inNumberFrames: UInt32,
-                               ioData: UnsafeMutablePointer<AudioBufferList>?) -> OSStatus {
-   return RenderTone(inRefCon, ioActionFlags, inTimeStamp, inBusNumber, inNumberFrames, ioData)
-}
-
-
-// MARK: Sin Wave
 // Fixed values used for sin wave and square wave
-private let sampleRate: Float = 44100.0
-private let amplitude: Float = 0.25
-private let frequency: Float = 440.0
+public let sampleRate: Float = 44100.0
+public let amplitude: Float = 0.25
+public let frequency: Float = 440.0
 
-/// For Sin wave, theta is changed over time as each sample is provided.
+// MARK: Sine Wave - in swift
+/// For Sine wave, theta is changed over time as each sample is provided.
 private var theta: Float = 0.0
 
 private func renderCallbackSin(inRefCon: UnsafeMutableRawPointer,
@@ -147,7 +140,7 @@ private func renderCallbackSin(inRefCon: UnsafeMutableRawPointer,
     return noErr
 }
 
-// MARK: Square Wave
+// MARK: Square Wave - in swift
 // values that change
 private var isSweepingUp = false
 private var isSweeping = false

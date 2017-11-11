@@ -10,6 +10,8 @@
 		0F9260D16CC3FCA02E1020EE /* Pods_AudioTestTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A63A0644E046898347870864 /* Pods_AudioTestTests.framework */; };
 		3E8FCD9F594FFA97B82FBEEE /* Pods_AudioTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E04BBDB52121FD64795FB3EC /* Pods_AudioTest.framework */; };
 		B63BBD091FB65B8A00FD3FA4 /* CAudioUnit.c in Sources */ = {isa = PBXBuildFile; fileRef = B63BBD081FB65B8A00FD3FA4 /* CAudioUnit.c */; };
+		B63BBD0C1FB77C4700FD3FA4 /* PulseGenerator.c in Sources */ = {isa = PBXBuildFile; fileRef = B63BBD0B1FB77C4700FD3FA4 /* PulseGenerator.c */; };
+		B63BBD0E1FB782BE00FD3FA4 /* AudioUnitCGlue.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63BBD0D1FB782BE00FD3FA4 /* AudioUnitCGlue.swift */; };
 		B6A6896E1FB4BF0800D95087 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A6896D1FB4BF0800D95087 /* AppDelegate.swift */; };
 		B6A689701FB4BF0800D95087 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A6896F1FB4BF0800D95087 /* ViewController.swift */; };
 		B6A689731FB4BF0800D95087 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6A689711FB4BF0800D95087 /* Main.storyboard */; };
@@ -37,6 +39,9 @@
 		B63BBD061FB65B8A00FD3FA4 /* AudioTest-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AudioTest-Bridging-Header.h"; sourceTree = "<group>"; };
 		B63BBD071FB65B8A00FD3FA4 /* CAudioUnit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CAudioUnit.h; sourceTree = "<group>"; };
 		B63BBD081FB65B8A00FD3FA4 /* CAudioUnit.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = CAudioUnit.c; sourceTree = "<group>"; };
+		B63BBD0A1FB77C4700FD3FA4 /* PulseGenerator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PulseGenerator.h; sourceTree = "<group>"; };
+		B63BBD0B1FB77C4700FD3FA4 /* PulseGenerator.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = PulseGenerator.c; sourceTree = "<group>"; };
+		B63BBD0D1FB782BE00FD3FA4 /* AudioUnitCGlue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioUnitCGlue.swift; sourceTree = "<group>"; };
 		B6A6896A1FB4BF0800D95087 /* AudioTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AudioTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6A6896D1FB4BF0800D95087 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B6A6896F1FB4BF0800D95087 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -99,6 +104,7 @@
 			isa = PBXGroup;
 			children = (
 				B6A689901FB4C17400D95087 /* AudioUnit.swift */,
+				B63BBD0D1FB782BE00FD3FA4 /* AudioUnitCGlue.swift */,
 				B6A6896F1FB4BF0800D95087 /* ViewController.swift */,
 				B6A689711FB4BF0800D95087 /* Main.storyboard */,
 				B6A689741FB4BF0800D95087 /* Assets.xcassets */,
@@ -108,6 +114,8 @@
 				B63BBD071FB65B8A00FD3FA4 /* CAudioUnit.h */,
 				B63BBD081FB65B8A00FD3FA4 /* CAudioUnit.c */,
 				B63BBD061FB65B8A00FD3FA4 /* AudioTest-Bridging-Header.h */,
+				B63BBD0A1FB77C4700FD3FA4 /* PulseGenerator.h */,
+				B63BBD0B1FB77C4700FD3FA4 /* PulseGenerator.c */,
 			);
 			path = AudioTest;
 			sourceTree = "<group>";
@@ -359,6 +367,8 @@
 				B6A689911FB4C17400D95087 /* AudioUnit.swift in Sources */,
 				B6A689701FB4BF0800D95087 /* ViewController.swift in Sources */,
 				B63BBD091FB65B8A00FD3FA4 /* CAudioUnit.c in Sources */,
+				B63BBD0E1FB782BE00FD3FA4 /* AudioUnitCGlue.swift in Sources */,
+				B63BBD0C1FB77C4700FD3FA4 /* PulseGenerator.c in Sources */,
 				B6A6896E1FB4BF0800D95087 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -3,3 +3,4 @@
 //
 
 #import "CAudioUnit.h"
+#import "PulseGenerator.h"
