@@ -12,7 +12,7 @@
 #include <stdio.h>
 #include <AudioToolbox/AudioToolbox.h>
 
-void setWidthSweep(double widthLow, double widthHigh, double seconds, double width);
+void setWidthSweepC(double widthLow, double widthHigh, double seconds, double width);
 
 OSStatus RenderSquareWave(void *inRefCon,
                     AudioUnitRenderActionFlags   *ioActionFlags,

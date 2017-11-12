@@ -10,7 +10,7 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    private var toneGenerator = ToneGenerator(waveType: .square)
+    private var toneGenerator = ToneGenerator(waveType: .squareInC)
     private var playing: Bool = false
     
     @IBOutlet weak var playButton: UIButton!
@@ -39,9 +39,9 @@ class ViewController: UIViewController {
         let index = waveSelector.selectedSegmentIndex
         switch index {
         case 0:
-            toneGenerator = ToneGenerator(waveType: .square)
+            toneGenerator = ToneGenerator(waveType: .squareInC)
         case 1:
-            toneGenerator = ToneGenerator(waveType: .sin)
+            toneGenerator = ToneGenerator(waveType: .sinInSwift)
         case 2:
             toneGenerator = ToneGenerator(waveType: .sinInC)
         default:

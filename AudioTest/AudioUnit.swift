@@ -12,13 +12,15 @@ import AudioUnit
 import CoreAudio
 
 enum WaveType {
-    case square,sin,sinInC
+    case squareInC,sinInSwift,sinInC,squareinSwift
 }
 
 class ToneGenerator {
     private var toneUnit: AudioUnit? = nil
+    private var waveType: WaveType = .sinInSwift
     
     init(waveType: WaveType) {
+        self.waveType = waveType
         setupAudioUnit(waveType: waveType)
     }
     
@@ -60,14 +62,16 @@ class ToneGenerator {
             sineInfo.theta = 0
             inputProcRef = UnsafeMutableRawPointer(&sineInfo)
             renderer = renderCallbackSinInC
-        } else if waveType == .square {
+        } else if waveType == .squareInC {
             //renderer = renderCallbackSquare
-            setWidthSweep(0.1,0.9,5.0,0.5)
+            setWidthSweepC(0.1,0.9,5.0,0.5)
             squareInfo.sampleRate = sampleRate
             squareInfo.amplitude = amplitude
             squareInfo.frequency = frequency
             inputProcRef = UnsafeMutableRawPointer(&squareInfo)
             renderer = renderCallbackSquareInC
+        } else if waveType == .squareinSwift {
+            renderer = renderCallbackSquare
         }
         
         
@@ -104,7 +108,10 @@ class ToneGenerator {
     
     func start() {
         var status: OSStatus
-        setWidthSweep(0.1, 0.9, 5.0)
+        // we only call setWidthSweep if we are using the square generator written in swift
+        if self.waveType == .squareinSwift {
+            setWidthSweep(widthL: 0.1, widthH: 0.9, seconds: 5.0)
+        }
 
         status = AudioUnitInitialize(toneUnit!)
         status = AudioOutputUnitStart(toneUnit!)
@@ -177,7 +184,7 @@ private func renderCallbackSquare(inRefCon: UnsafeMutableRawPointer,
 }
 
 // MARK: square wave helpers
-private func setWidthSweep(_ widthL: Float, _ widthH: Float, _ seconds: Float){
+private func setWidthSweep(widthL: Float, widthH: Float, seconds: Float){
     widthHigh = widthH
     widthLow = widthL
     sweepScaler = fabs(widthHigh - widthLow) / seconds * sampleRate
