@@ -11,19 +11,6 @@
 
 #include "PulseGenerator.h"
 
-SquareChannelInfo squareInfo;
-
-bool isSweepingUp_ = false;
-bool isSweeping_ = false;
-double widthIterator_ = 0;
-double freq_;
-double sampleRate_;
-double width_;
-double amplitude_;
-double sweepScaler_;
-double widthHigh_;
-double widthLow_;
-    
 //    PulseGenerator(double sampleRate) {
 //        sampleRate_ = sampleRate;
 //        freq_ = 440.0;
@@ -32,23 +19,21 @@ double widthLow_;
 //        setWidthSweep(0.1,0.9,5.0);
 //    }
 
-void setAmplitude(double newAmplitude){
-    amplitude_ = newAmplitude;
-}
+SquareChannelInfo squareInfo;
 
-void setPulseWidth(double newWidth){
-    width_ = newWidth;
-}
+bool isSweepingUp_ = false;
+bool isSweeping_ = false;
+float widthIterator_ = 0;
+float width_;
+float sweepScaler_;
+float widthHigh_;
+float widthLow_;
 
-void setFreq(double newFreq){
-    freq_ = newFreq;
-}
-
-void setWidthSweepC(double widthLow, double widthHigh, double seconds, double width) {
+void setWidthSweepC(float widthLow, float widthHigh, float seconds, float width) {
     width_ = width;
     widthHigh_ = widthHigh;
     widthLow_ = widthLow;
-    sweepScaler_ = fabs(widthHigh - widthLow) / seconds * sampleRate_;
+    sweepScaler_ = fabs(widthHigh - widthLow) / (seconds * squareInfo.sampleRate);  // should this expression use () like that?
     isSweeping_ = true;
 }
 
@@ -56,11 +41,13 @@ void handleSweep(){
     if(!isSweeping_) return;
     if(isSweepingUp_){
         width_ += sweepScaler_;
-        if(width_ >= widthHigh_) isSweepingUp_ = false;
+        if(width_ >= widthHigh_)
+            isSweepingUp_ = false;
     }
     else{
         width_ -=  sweepScaler_;
-        if(width_ <= widthLow_) isSweepingUp_ = true;
+        if(width_ <= widthLow_)
+            isSweepingUp_ = true;
     }
 }
 
@@ -71,13 +58,13 @@ bool isOn(){
     if(width_ == 0) {
         return false;
     }
-    if(widthIterator_ < sampleRate_ / freq_ * width_){
+    if(widthIterator_ < (squareInfo.sampleRate / squareInfo.frequency) * width_){
         widthIterator_ += 1;
         handleSweep();
         return true;
     }
     else{
-        if(widthIterator_ >= sampleRate_ / freq_ ){
+        if(widthIterator_ >= squareInfo.sampleRate / squareInfo.frequency ){
             widthIterator_ = 0;
         }
         widthIterator_ += 1;
@@ -87,13 +74,13 @@ bool isOn(){
 }
 
 // this is the chewy center
-void render(float *buffer, int32_t channelStride, int32_t numFrames, double amplitude){
+void render(float *buffer, int32_t channelStride, int32_t numFrames, float amplitude){
     int sampleIndex = 0;
     for(int i = 0; i < numFrames; i++){
         if(isOn()) {
-            buffer[sampleIndex] = (float) (1 * amplitude_);
+            buffer[sampleIndex] = (float) (1 * squareInfo.amplitude);
         } else {
-            buffer[sampleIndex] = (float) (0 * amplitude_);
+            buffer[sampleIndex] = (float) (0 * squareInfo.amplitude);
         }
         sampleIndex += channelStride;
     }
@@ -101,7 +88,7 @@ void render(float *buffer, int32_t channelStride, int32_t numFrames, double ampl
 
 /**
  This is what interfaces with iOS Audio system
- we delegate to internal guts
+ we delegate to internal guts in the render function
  */
 OSStatus RenderSquareWave(
                     void *inRefCon,
@@ -117,10 +104,7 @@ OSStatus RenderSquareWave(
     
     // Get the tone parameters out of the object
     SquareChannelInfo *channelInfo = (SquareChannelInfo *)inRefCon;
-    sampleRate_ = channelInfo->sampleRate;
-    freq_ = channelInfo->frequency;
-    amplitude_ = channelInfo->amplitude;
-    
+   
     assert(ioData->mNumberBuffers == numChannels);
     
     for (size_t chan = 0; chan < numChannels; chan++) {

@@ -12,7 +12,6 @@
 #include <stdio.h>
 #include <AudioToolbox/AudioToolbox.h>
 
-void setWidthSweepC(double widthLow, double widthHigh, double seconds, double width);
 
 OSStatus RenderSquareWave(void *inRefCon,
                     AudioUnitRenderActionFlags   *ioActionFlags,
@@ -28,5 +27,7 @@ typedef struct {
 } SquareChannelInfo;
 
 SquareChannelInfo squareInfo;
+
+void setWidthSweepC(float widthLow, float widthHigh, float seconds, float width);
 
 #endif /* PulseGenerator_h */
