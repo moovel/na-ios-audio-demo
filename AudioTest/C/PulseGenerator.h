@@ -21,13 +21,13 @@ OSStatus RenderSquareWave(void *inRefCon,
                     AudioBufferList             *ioData);
 
 typedef struct {
-    float sampleRate;
-    float frequency;
-    float amplitude;
+    double sampleRate;
+    double frequency;
+    double amplitude;
 } SquareChannelInfo;
 
 SquareChannelInfo squareInfo;
 
-void setWidthSweepC(float widthLow, float widthHigh, float seconds, float width);
+void setWidthSweepC(double widthLow, double widthHigh, double seconds, double width);
 
 #endif /* PulseGenerator_h */

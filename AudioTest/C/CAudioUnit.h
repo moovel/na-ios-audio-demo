@@ -19,10 +19,10 @@ OSStatus RenderSineWave(void *inRefCon,
                     AudioBufferList             *ioData);
 
 typedef struct {
-    float sampleRate;
-    float frequency;
-    float amplitude;
-    float theta;
+    double sampleRate;
+    double frequency;
+    double amplitude;
+    double theta;
 } SineChannelInfo;
 
 SineChannelInfo sineInfo;

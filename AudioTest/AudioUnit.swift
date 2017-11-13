@@ -126,9 +126,9 @@ class ToneGenerator {
     
 }
 // Fixed values used for sin wave and square wave
-public let sampleRate: Float = 44100.0
-public let amplitude: Float = 0.25
-public let frequency: Float = 440.0
+public let sampleRate: Double = 44100.0
+public let amplitude: Double = 0.25
+public let frequency: Double = 440.0
 
 // MARK: Sine Wave - in swift
 /// For Sine wave, theta is changed over time as each sample is provided.
@@ -145,8 +145,8 @@ private func renderCallbackSin(inRefCon: UnsafeMutableRawPointer,
     let pointer: UnsafeMutableBufferPointer<Float32> = UnsafeMutableBufferPointer(buffer)
     for frame in 0..<inNumberFrames {
         let pointerIndex = pointer.startIndex + (Int(frame))
-        pointer[pointerIndex] = sin(theta) * amplitude
-        theta += 2.0 * Float(Double.pi) * frequency / Float(sampleRate)
+        pointer[pointerIndex] = sin(theta) * Float(amplitude)
+        theta += 2.0 * Float(Double.pi) * Float(frequency) / Float(sampleRate)
     }
     
     return noErr
@@ -156,11 +156,11 @@ private func renderCallbackSin(inRefCon: UnsafeMutableRawPointer,
 // values that change
 private var isSweepingUp = false
 private var isSweeping = false
-private var widthIterator: Float = 0.0
-private var width: Float = 0.5
-private var sweepScaler: Float = 0.0
-private var widthHigh: Float = 0.0
-private var widthLow: Float = 0.0
+private var widthIterator: Double = 0.0
+private var width: Double = 0.5
+private var sweepScaler: Double = 0.0
+private var widthHigh: Double = 0.0
+private var widthLow: Double = 0.0
 
 private func renderCallbackSquare(inRefCon: UnsafeMutableRawPointer,
                                   ioActionFlags: UnsafeMutablePointer<AudioUnitRenderActionFlags>,
@@ -175,9 +175,9 @@ private func renderCallbackSquare(inRefCon: UnsafeMutableRawPointer,
     for frame in 0..<inNumberFrames {
         pointerIndex = pointer.startIndex + Int(frame)
         if isOn() {
-            pointer[pointerIndex] = 1 * amplitude
+            pointer[pointerIndex] = Float(1 * amplitude)
         } else {
-            pointer[pointerIndex] = 0 * amplitude
+            pointer[pointerIndex] = Float(0 * amplitude)
         }
     }
     
@@ -185,7 +185,7 @@ private func renderCallbackSquare(inRefCon: UnsafeMutableRawPointer,
 }
 
 // MARK: square wave helpers
-private func setWidthSweep(widthL: Float, widthH: Float, seconds: Float){
+private func setWidthSweep(widthL: Double, widthH: Double, seconds: Double){
     widthHigh = widthH
     widthLow = widthL
     sweepScaler = fabs(widthHigh - widthLow) / seconds * sampleRate

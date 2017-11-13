@@ -23,13 +23,13 @@ SquareChannelInfo squareInfo;
 
 bool isSweepingUp_ = false;
 bool isSweeping_ = false;
-float widthIterator_ = 0;
-float width_;
-float sweepScaler_;
-float widthHigh_;
-float widthLow_;
+double widthIterator_ = 0;
+double width_;
+double sweepScaler_;
+double widthHigh_;
+double widthLow_;
 
-void setWidthSweepC(float widthLow, float widthHigh, float seconds, float width) {
+void setWidthSweepC(double widthLow, double widthHigh, double seconds, double width) {
     width_ = width;
     widthHigh_ = widthHigh;
     widthLow_ = widthLow;
