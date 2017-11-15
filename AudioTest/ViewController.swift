@@ -27,7 +27,14 @@ class ViewController: UIViewController {
 
         }
     }
+    @IBAction func resetButtonTap(_ sender: Any) {
+        frequency = 440.0
+        frequencyLabel.text = String(format: "%.2f hz", frequency)
+        frequencySlider.value = Float(frequency)
+        self.waveSelectionChanged(self)
+    }
     
+    @IBOutlet weak var frequencyLabel: UILabel!
     @IBOutlet weak var waveSelector: UISegmentedControl!
     @IBAction func waveSelectionChanged(_ sender: Any) {
         let wasPlaying = playing
@@ -53,12 +60,21 @@ class ViewController: UIViewController {
             self.playTapped(self)
         }
     }
+    @IBOutlet weak var frequencySlider: UISlider!
+    
+    @IBAction func frequencyChanged(_ sender: Any) {
+        let newValue = frequencySlider.value
+        frequency = Double(newValue)
+        self.waveSelectionChanged(self)
+        frequencyLabel.text = String(format: "%.2f hz", frequency)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         // get the wave type set up right off the bat
         self.waveSelectionChanged(self)
+        frequencyLabel.text = String(format: "%.2f hz", frequency)
     }
 
     override func didReceiveMemoryWarning() {

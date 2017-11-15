@@ -114,7 +114,6 @@
 		B6A6896C1FB4BF0800D95087 /* AudioTest */ = {
 			isa = PBXGroup;
 			children = (
-				B63BBD061FB65B8A00FD3FA4 /* AudioTest-Bridging-Header.h */,
 				3C0A89211FBA1859005B01B0 /* C */,
 				B6A689901FB4C17400D95087 /* AudioUnit.swift */,
 				B63BBD0D1FB782BE00FD3FA4 /* AudioUnitCGlue.swift */,
@@ -124,6 +123,7 @@
 				B6A689761FB4BF0800D95087 /* LaunchScreen.storyboard */,
 				B6A689791FB4BF0800D95087 /* Info.plist */,
 				B6A6896D1FB4BF0800D95087 /* AppDelegate.swift */,
+				B63BBD061FB65B8A00FD3FA4 /* AudioTest-Bridging-Header.h */,
 			);
 			path = AudioTest;
 			sourceTree = "<group>";

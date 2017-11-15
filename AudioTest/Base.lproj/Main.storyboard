@@ -18,8 +18,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="n2k-3O-l8w">
-                                <rect key="frame" x="27" y="426" width="332" height="29"/>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="n2k-3O-l8w">
+                                <rect key="frame" x="62" y="426" width="251" height="29"/>
                                 <segments>
                                     <segment title="Square - C"/>
                                     <segment title="Sine - swift"/>
@@ -37,17 +37,49 @@
                                     <action selector="playTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cYh-VV-n05"/>
                                 </connections>
                             </button>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="440" minValue="20" maxValue="12000" translatesAutoresizingMaskIntoConstraints="NO" id="ltg-IN-bT5">
+                                <rect key="frame" x="58" y="496" width="259" height="31"/>
+                                <connections>
+                                    <action selector="frequencyChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="cBm-BA-qFY"/>
+                                </connections>
+                            </slider>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VeR-tJ-w2K">
+                                <rect key="frame" x="60" y="541" width="255" height="0.0"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VDV-jx-7iM">
+                                <rect key="frame" x="100" y="617" width="175" height="30"/>
+                                <state key="normal" title="Reset"/>
+                                <connections>
+                                    <action selector="resetButtonTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="SZv-xE-XGj"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="VDV-jx-7iM" secondAttribute="trailing" constant="100" id="2ox-Br-xiZ"/>
+                            <constraint firstItem="VeR-tJ-w2K" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="5z5-hG-4Hc"/>
                             <constraint firstItem="ObD-f6-ZKH" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="336" id="Dhh-3X-OJB"/>
                             <constraint firstItem="n2k-3O-l8w" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Dnf-rX-U9d"/>
                             <constraint firstItem="n2k-3O-l8w" firstAttribute="top" secondItem="ObD-f6-ZKH" secondAttribute="bottom" constant="34" id="J8f-n5-Afz"/>
+                            <constraint firstItem="ltg-IN-bT5" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="60" id="Q5c-TK-knr"/>
+                            <constraint firstItem="ltg-IN-bT5" firstAttribute="top" secondItem="n2k-3O-l8w" secondAttribute="bottom" constant="42" id="RXx-JI-drx"/>
+                            <constraint firstItem="VeR-tJ-w2K" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="541" id="SqT-jk-Lc5"/>
+                            <constraint firstItem="VeR-tJ-w2K" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="60" id="VJU-sG-Aiw"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="VDV-jx-7iM" secondAttribute="bottom" constant="20" id="W6P-9Y-IUS"/>
                             <constraint firstItem="ObD-f6-ZKH" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="dmB-bQ-YDw"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ltg-IN-bT5" secondAttribute="trailing" constant="60" id="uOo-F9-MtW"/>
+                            <constraint firstItem="VDV-jx-7iM" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="100" id="vZU-OW-M2u"/>
+                            <constraint firstItem="ltg-IN-bT5" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="yVY-37-7zq"/>
+                            <constraint firstAttribute="trailing" secondItem="VeR-tJ-w2K" secondAttribute="trailing" constant="60" id="yeP-TA-sC4"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="frequencyLabel" destination="VeR-tJ-w2K" id="BQG-ut-EUm"/>
+                        <outlet property="frequencySlider" destination="ltg-IN-bT5" id="5VC-xV-hmt"/>
                         <outlet property="playButton" destination="ObD-f6-ZKH" id="Pc5-Hl-My3"/>
                         <outlet property="waveSelector" destination="n2k-3O-l8w" id="uFw-lU-Nj1"/>
                     </connections>

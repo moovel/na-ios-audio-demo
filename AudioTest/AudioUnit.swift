@@ -15,6 +15,11 @@ enum WaveType {
     case squareInC,sinInSwift,sinInC,squareinSwift
 }
 
+// values used for sin wave and square wave, we might add controls to change these on the fly
+public var sampleRate: Double = 44100.0
+public var amplitude: Double = 0.25
+public var frequency: Double = 440.0
+
 class ToneGenerator {
     private var toneUnit: AudioUnit? = nil
     private var waveType: WaveType = .sinInSwift
@@ -125,10 +130,6 @@ class ToneGenerator {
     }
     
 }
-// Fixed values used for sin wave and square wave
-public let sampleRate: Double = 44100.0
-public let amplitude: Double = 0.25
-public let frequency: Double = 440.0
 
 // MARK: Sine Wave - in swift
 /// For Sine wave, theta is changed over time as each sample is provided.
