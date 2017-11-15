@@ -319,10 +319,12 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-AudioTestTests/Pods-AudioTestTests-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/RealtimeWatchdog/RealtimeWatchdog.framework",
+				"${BUILT_PRODUCTS_DIR}/TPCircularBuffer/TPCircularBuffer.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealtimeWatchdog.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TPCircularBuffer.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
