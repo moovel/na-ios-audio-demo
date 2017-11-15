@@ -13,16 +13,20 @@ class ViewController: UIViewController {
     private var toneGenerator = ToneGenerator(waveType: .squareInC)
     private var playing: Bool = false
     
+    private var listener = ToneListener()
+    
     @IBOutlet weak var playButton: UIButton!
    
     @IBAction func playTapped(_ sender: Any) {
         if playing {
             playing = false
             toneGenerator.stop()
+            listener.stop()
             playButton.setTitle("Play", for: .normal)
         } else {
             playing = true
             toneGenerator.start()
+            listener.start()
             playButton.setTitle("Stop", for: .normal)
 
         }
