@@ -13,7 +13,7 @@ import CoreAudio
 import AVFoundation
 
 class ToneListener {
-    private var listenerUnit: AudioUnit? = nil
+    public var listenerUnit: AudioUnit? = nil
     private let inputBus: UInt32    =  1
     
     
@@ -63,7 +63,7 @@ class ToneListener {
         
         // the default sine generator in swift needs minimal setup
         let renderer: AudioToolbox.AURenderCallback = renderCallbackInput
-        let inputProcRef: UnsafeMutableRawPointer? = nil
+        let inputProcRef: UnsafeMutableRawPointer? = UnsafeMutableRawPointer(listenerUnit)
         
         // Set the render callback as the input for our audio unit:
         var renderCallbackStruct = AURenderCallbackStruct(inputProc: renderer,
@@ -90,11 +90,11 @@ class ToneListener {
                                                        mFormatID: kAudioFormatLinearPCM,
                                                        mFormatFlags: kAudioFormatFlagsNativeFloatPacked|kAudioFormatFlagIsNonInterleaved,
                                                        mBytesPerPacket: 4 /*four bytes per float*/,
-            mFramesPerPacket: 1,
-            mBytesPerFrame: 4,
-            mChannelsPerFrame: 1,
-            mBitsPerChannel: 4*8,
-            mReserved: 0)
+                                                        mFramesPerPacket: 1,
+                                                        mBytesPerFrame: 4,
+                                                        mChannelsPerFrame: 1,
+                                                        mBitsPerChannel: 4*8,
+                                                        mReserved: 0)
         err = AudioUnitSetProperty(listenerUnit!,
                                    kAudioUnitProperty_StreamFormat,
                                    kAudioUnitScope_Output,
@@ -176,7 +176,6 @@ class ToneListener {
         AudioOutputUnitStop(listenerUnit!)
         AudioUnitUninitialize(listenerUnit!)
     }
-    
 }
 
 private func renderCallbackInput(inRefCon: UnsafeMutableRawPointer,
@@ -185,14 +184,28 @@ private func renderCallbackInput(inRefCon: UnsafeMutableRawPointer,
                                inBusNumber: UInt32,
                                inNumberFrames: UInt32,
                                ioData: UnsafeMutablePointer<AudioBufferList>?) -> OSStatus {
-    print("renderCallbackInput called, numberFrames: \(inNumberFrames)")
-    let abl = UnsafeMutableAudioBufferListPointer(ioData)
-//    let buffer = abl![0]
-//    let pointer: UnsafeMutableBufferPointer<Float32> = UnsafeMutableBufferPointer(buffer)
-//    for frame in 0..<inNumberFrames {
-//        let pointerIndex = pointer.startIndex + (Int(frame))
-//        let _ = pointer[pointerIndex]
-//    }
+    //print("renderCallbackInput called, numberFrames: \(inNumberFrames)")
+    let listener: AudioUnit = unsafeBitCast(inRefCon, to: AudioUnit.self)
     
-    return noErr
+    // set mData to nil, AudioUnitRender() should be allocating buffers
+    let buffsize = inNumberFrames * 4
+    
+    var bufferList = AudioBufferList(
+        mNumberBuffers: 1,
+        mBuffers: AudioBuffer(
+            mNumberChannels: UInt32(1),
+            mDataByteSize: buffsize,
+            mData: nil ))   // malloc(Int(buffsize)
+    var err: OSStatus
+    
+    err = AudioUnitRender(listener,
+                              ioActionFlags,
+                              inTimeStamp,
+                              inBusNumber,
+                              inNumberFrames,
+                              &bufferList)
+    
+    // process here...
+    
+    return err
 }
