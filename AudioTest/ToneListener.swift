@@ -12,19 +12,18 @@ import AudioUnit
 import CoreAudio
 import AVFoundation
 
+// https://gist.github.com/hotpaw2/ba815fc23b5d642705f2b1dedfaf0107
+
 class ToneListener {
     public var listenerUnit: AudioUnit? = nil
     private let inputBus: UInt32    =  1
-    
     
     var micPermission   =  false
     var sessionActive   =  false
     var isRecording     =  false
     
     var sampleRate : Double = 44100.0    // default audio sample rate
-    let circBuffSize = 32768        // lock-free circular fifo/buffer size
-    var circBuffer   = [Float](repeating: 0, count: 32768)  // for incoming samples
-    var circInIdx  : Int =  0
+    
     var audioLevel : Float  = 0.0
     
     private var hwSRate = 48000.0   // guess of device hardware sample rate
@@ -40,6 +39,13 @@ class ToneListener {
     }
     
     func setupAudioUnit() {
+        /*
+        #define TPCircularBufferInit(buffer, length) \
+        _TPCircularBufferInit(buffer, length, sizeof(*buffer))
+        bool _TPCircularBufferInit(TPCircularBuffer *buffer, int32_t length, size_t structSize);
+*/
+        // setup the circular buffer
+        //_TPCircularBufferInit(UnsafeMutablePointer(&circBuffer), circBuffSize, sizeof(circBuffer))
         
         // Configure the description of the output audio component we want to find:
         let componentSubtype: OSType
@@ -178,6 +184,11 @@ class ToneListener {
     }
 }
 
+//var circBuffer: TPCircularBuffer = TPCircularBuffer()
+let circBuffSize: Int32 = 32768        // lock-free circular fifo/buffer size
+var circBuffer   = [Float](repeating: 0, count: 32768)  // for incoming samples
+var circInIdx  : Int =  0
+
 private func renderCallbackInput(inRefCon: UnsafeMutableRawPointer,
                                ioActionFlags: UnsafeMutablePointer<AudioUnitRenderActionFlags>,
                                inTimeStamp: UnsafePointer<AudioTimeStamp>,
@@ -185,7 +196,7 @@ private func renderCallbackInput(inRefCon: UnsafeMutableRawPointer,
                                inNumberFrames: UInt32,
                                ioData: UnsafeMutablePointer<AudioBufferList>?) -> OSStatus {
     //print("renderCallbackInput called, numberFrames: \(inNumberFrames)")
-    let listener: AudioUnit = unsafeBitCast(inRefCon, to: AudioUnit.self)
+    let listenerAudioUnit = unsafeBitCast(inRefCon, to: AudioUnit.self)
     
     // set mData to nil, AudioUnitRender() should be allocating buffers
     let buffsize = inNumberFrames * 4
@@ -198,7 +209,7 @@ private func renderCallbackInput(inRefCon: UnsafeMutableRawPointer,
             mData: nil ))   // malloc(Int(buffsize)
     var err: OSStatus
     
-    err = AudioUnitRender(listener,
+    err = AudioUnitRender(listenerAudioUnit,
                               ioActionFlags,
                               inTimeStamp,
                               inBusNumber,
@@ -206,6 +217,27 @@ private func renderCallbackInput(inRefCon: UnsafeMutableRawPointer,
                               &bufferList)
     
     // process here...
+    let count = Int(inNumberFrames)
     
+    let bufferPointer = UnsafeMutableRawPointer(bufferList.mBuffers.mData)
+    if let bptr = bufferPointer {
+        let dataArray = bptr.assumingMemoryBound(to: Float.self)
+        var sum : Float = 0.0
+        var j = circInIdx
+        let m = circBuffSize
+        for i in 0..<(count/2) {
+            let x = Float(dataArray[i+i  ])   // copy left  channel sample
+            let y = Float(dataArray[i+i+1])   // copy right channel sample
+            circBuffer[j    ] = x
+            circBuffer[j + 1] = y
+            j += 2 ; if j >= m
+            {
+                j = 0
+            }                // into circular buffer
+            sum += x * x + y * y
+        }
+        circInIdx = j
+    }
+        
     return err
 }

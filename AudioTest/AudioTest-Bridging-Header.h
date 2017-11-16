@@ -4,3 +4,4 @@
 
 #import "CAudioUnit.h"
 #import "PulseGenerator.h"
+#import "../Pods/TPCircularBuffer/TPCircularBuffer.h"
