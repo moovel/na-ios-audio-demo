@@ -39,11 +39,6 @@ class ToneListener {
     }
     
     func setupAudioUnit() {
-        /*
-        #define TPCircularBufferInit(buffer, length) \
-        _TPCircularBufferInit(buffer, length, sizeof(*buffer))
-        bool _TPCircularBufferInit(TPCircularBuffer *buffer, int32_t length, size_t structSize);
-*/
         // setup the circular buffer
         //_TPCircularBufferInit(UnsafeMutablePointer(&circBuffer), circBuffSize, sizeof(circBuffer))
         
@@ -222,19 +217,17 @@ private func renderCallbackInput(inRefCon: UnsafeMutableRawPointer,
     let bufferPointer = UnsafeMutableRawPointer(bufferList.mBuffers.mData)
     if let bptr = bufferPointer {
         let dataArray = bptr.assumingMemoryBound(to: Float.self)
-        var sum : Float = 0.0
         var j = circInIdx
         let m = circBuffSize
-        for i in 0..<(count/2) {
-            let x = Float(dataArray[i+i  ])   // copy left  channel sample
-            let y = Float(dataArray[i+i+1])   // copy right channel sample
-            circBuffer[j    ] = x
-            circBuffer[j + 1] = y
-            j += 2 ; if j >= m
+        // copy sample
+        // into circular buffer
+        for i in 0..<count {
+            let x = Float(dataArray[i])
+            circBuffer[j ] = x
+            j += 1 ; if j >= m
             {
                 j = 0
-            }                // into circular buffer
-            sum += x * x + y * y
+            }
         }
         circInIdx = j
     }
