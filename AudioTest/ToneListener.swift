@@ -72,7 +72,6 @@ class ToneListener {
             
         } else {
             renderer  = renderCallbackInputInC
-            //listenerInfo.audioUnit = UnsafeMutablePointer(listenerUnit)
             listenerInfo.audioUnit = listenerUnit
             listenerInfo.sampleRate = sampleRate
             
