@@ -1,6 +1,6 @@
 PODS:
   - RealtimeWatchdog (1.0.1)
-  - TPCircularBuffer (1.4)
+  - TPCircularBuffer (1.5)
 
 DEPENDENCIES:
   - RealtimeWatchdog
@@ -8,8 +8,8 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   RealtimeWatchdog: 972e1bf69df2074b5e2f1cb458cb71125286b040
-  TPCircularBuffer: c0160545b63019adf85231e3de543bbc97cb9041
+  TPCircularBuffer: 5196b690383e7bc54771e2f26e10c17cd928bd22
 
-PODFILE CHECKSUM: 9215dbf2a328308791ef15eacd33311e9bd57ceb
+PODFILE CHECKSUM: c6e9d8696f09cae0974abd6fad12cd7745e1a036
 
 COCOAPODS: 1.3.1

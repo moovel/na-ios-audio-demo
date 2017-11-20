@@ -30,3 +30,17 @@ public func renderCallbackSquareInC(inRefCon: UnsafeMutableRawPointer,
                                      ioData: UnsafeMutablePointer<AudioBufferList>?) -> OSStatus {
     return RenderSquareWave(inRefCon, ioActionFlags, inTimeStamp, inBusNumber, inNumberFrames, ioData)
 }
+
+// this delegates to a C function, but we have this swift wrapper to make the Audio callback protocol happy
+public func renderCallbackInputInC(inRefCon: UnsafeMutableRawPointer,
+                                ioActionFlags: UnsafeMutablePointer<AudioUnitRenderActionFlags>,
+                                inTimeStamp: UnsafePointer<AudioTimeStamp>,
+                                inBusNumber: UInt32,
+                                inNumberFrames: UInt32,
+                                ioData: UnsafeMutablePointer<AudioBufferList>?) -> OSStatus {
+    return recordingCallback(inRefCon, ioActionFlags, inTimeStamp, inBusNumber, inNumberFrames, ioData)
+}
+
+
+
+

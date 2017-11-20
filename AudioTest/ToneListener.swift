@@ -61,14 +61,30 @@ class ToneListener {
         // Create a new instance of it in the form of our audio unit:
         err = AudioComponentInstanceNew(defaultOutput!, &listenerUnit)
         assert(err == noErr, "AudioComponentInstanceNew failed")
+        let useSwiftFunc = false
         
-        // the default sine generator in swift needs minimal setup
-        let renderer: AudioToolbox.AURenderCallback = renderCallbackInput
-        let inputProcRef: UnsafeMutableRawPointer? = UnsafeMutableRawPointer(listenerUnit)
+        var renderer: AudioToolbox.AURenderCallback!
+        var inputProcRef: UnsafeMutableRawPointer?
         
+        if useSwiftFunc {
+            renderer = renderCallbackInput
+            inputProcRef = UnsafeMutableRawPointer(listenerUnit)
+            
+        } else {
+            renderer  = renderCallbackInputInC
+            //listenerInfo.audioUnit = UnsafeMutablePointer(listenerUnit)
+            listenerInfo.audioUnit = listenerUnit
+            listenerInfo.sampleRate = sampleRate
+            
+            inputProcRef = UnsafeMutableRawPointer(&listenerInfo)
+            
+        }
         // Set the render callback as the input for our audio unit:
         var renderCallbackStruct = AURenderCallbackStruct(inputProc: renderer,
                                                           inputProcRefCon: inputProcRef)
+
+        
+        
         var one_ui32: UInt32 = 1
         
         err = AudioUnitSetProperty(listenerUnit!,
@@ -143,9 +159,15 @@ class ToneListener {
                 // sampleRate = 44100.0
                 var preferredIOBufferDuration = 0.0058      // 5.8 milliseconds = 256 samples
                 hwSRate = audioSession.sampleRate           // get native hardware rate
-                if hwSRate == 48000.0 { sampleRate = 48000.0 }  // set session to hardware rate
+                if hwSRate == 48000.0 {
+                    sampleRate = 48000.0
+                    listenerInfo.sampleRate = sampleRate
+                }
+                // set session to hardware rate
                 if hwSRate == 48000.0 { preferredIOBufferDuration = 0.0053 }
                 let desiredSampleRate = sampleRate
+                
+                
                 try audioSession.setPreferredSampleRate(desiredSampleRate)
                 try audioSession.setPreferredIOBufferDuration(preferredIOBufferDuration)
                 
@@ -179,17 +201,18 @@ class ToneListener {
     }
 }
 
+
 //var circBuffer: TPCircularBuffer = TPCircularBuffer()
 let circBuffSize: Int32 = 32768        // lock-free circular fifo/buffer size
 var circBuffer   = [Float](repeating: 0, count: 32768)  // for incoming samples
 var circInIdx  : Int =  0
 
-private func renderCallbackInput(inRefCon: UnsafeMutableRawPointer,
-                               ioActionFlags: UnsafeMutablePointer<AudioUnitRenderActionFlags>,
-                               inTimeStamp: UnsafePointer<AudioTimeStamp>,
-                               inBusNumber: UInt32,
-                               inNumberFrames: UInt32,
-                               ioData: UnsafeMutablePointer<AudioBufferList>?) -> OSStatus {
+public func renderCallbackInput(inRefCon: UnsafeMutableRawPointer,
+                                ioActionFlags: UnsafeMutablePointer<AudioUnitRenderActionFlags>,
+                                inTimeStamp: UnsafePointer<AudioTimeStamp>,
+                                inBusNumber: UInt32,
+                                inNumberFrames: UInt32,
+                                ioData: UnsafeMutablePointer<AudioBufferList>?) -> OSStatus {
     //print("renderCallbackInput called, numberFrames: \(inNumberFrames)")
     let listenerAudioUnit = unsafeBitCast(inRefCon, to: AudioUnit.self)
     
@@ -205,11 +228,11 @@ private func renderCallbackInput(inRefCon: UnsafeMutableRawPointer,
     var err: OSStatus
     
     err = AudioUnitRender(listenerAudioUnit,
-                              ioActionFlags,
-                              inTimeStamp,
-                              inBusNumber,
-                              inNumberFrames,
-                              &bufferList)
+                          ioActionFlags,
+                          inTimeStamp,
+                          inBusNumber,
+                          inNumberFrames,
+                          &bufferList)
     
     // process here...
     let count = Int(inNumberFrames)
@@ -231,6 +254,7 @@ private func renderCallbackInput(inRefCon: UnsafeMutableRawPointer,
         }
         circInIdx = j
     }
-        
+    
     return err
 }
+

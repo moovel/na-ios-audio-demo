@@ -68,12 +68,10 @@ class ToneGenerator {
             inputProcRef = UnsafeMutableRawPointer(&sineInfo)
             renderer = renderCallbackSinInC
         } else if waveType == .squareInC {
-            //renderer = renderCallbackSquare
             squareInfo.sampleRate = sampleRate
             squareInfo.amplitude = amplitude
             squareInfo.frequency = frequency
             setWidthSweepC(0.1,0.9,5.0,0.5)
-            
             inputProcRef = UnsafeMutableRawPointer(&squareInfo)
             renderer = renderCallbackSquareInC
         } else if waveType == .squareinSwift {
