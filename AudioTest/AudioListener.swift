@@ -14,7 +14,7 @@ import AVFoundation
 
 // https://gist.github.com/hotpaw2/ba815fc23b5d642705f2b1dedfaf0107
 
-class ToneListener {
+class AudioListener {
     public var listenerUnit: AudioUnit? = nil
     private let inputBus: UInt32    =  1
     
@@ -61,10 +61,11 @@ class ToneListener {
         // Create a new instance of it in the form of our audio unit:
         err = AudioComponentInstanceNew(defaultOutput!, &listenerUnit)
         assert(err == noErr, "AudioComponentInstanceNew failed")
-        let useSwiftFunc = false
         
         var renderer: AudioToolbox.AURenderCallback!
         var inputProcRef: UnsafeMutableRawPointer?
+        
+        let useSwiftFunc = false
         
         if useSwiftFunc {
             renderer = renderCallbackInput
@@ -78,6 +79,7 @@ class ToneListener {
             inputProcRef = UnsafeMutableRawPointer(&listenerInfo)
             
         }
+        
         // Set the render callback as the input for our audio unit:
         var renderCallbackStruct = AURenderCallbackStruct(inputProc: renderer,
                                                           inputProcRefCon: inputProcRef)
@@ -128,6 +130,18 @@ class ToneListener {
         
     }
     
+    func stopAudioSession() {
+        if (sessionActive == true) {
+            let audioSession = AVAudioSession.sharedInstance()
+            do {
+                try audioSession.setActive(false)
+                sessionActive = false
+            } catch {
+                
+            }
+        }
+            
+    }
     func startAudioSession() {
         if (sessionActive == false) {
             // set and activate Audio Session
@@ -177,7 +191,7 @@ class ToneListener {
 //                    using: myAudioSessionInterruptionHandler )
 //
                 try audioSession.setActive(true)
-                //sessionActive = true
+                sessionActive = true
             } catch /* let error as NSError */ {
                 // handle error here
             }
@@ -186,7 +200,6 @@ class ToneListener {
     
     func start() {
         var status: OSStatus
-        // we only call setWidthSweep if we are using the square generator written in swift
         startAudioSession()
 
         status = AudioUnitInitialize(listenerUnit!)
@@ -195,6 +208,8 @@ class ToneListener {
     }
     
     func stop() {
+        stopAudioSession()
+        
         AudioOutputUnitStop(listenerUnit!)
         AudioUnitUninitialize(listenerUnit!)
     }

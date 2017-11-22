@@ -8,8 +8,6 @@
 
 import Foundation
 
-// MARK: callbacks
-
 // MARK: C AudioUnit callback wrappers
 // this delegates to a C function, but we have this swift wrapper to make the Audio callback protocol happy
 public func renderCallbackSinInC(inRefCon: UnsafeMutableRawPointer,

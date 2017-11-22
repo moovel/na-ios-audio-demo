@@ -5,4 +5,4 @@
 #import "CAudioUnit.h"
 #import "PulseGenerator.h"
 #import "AudioListener.h"
-#import "../Pods/TPCircularBuffer/TPCircularBuffer.h"
+#import "../Pods/TPCircularBuffer/TPCircularBuffer+AudioBufferList.h"

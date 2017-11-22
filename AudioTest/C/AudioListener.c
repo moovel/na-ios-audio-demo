@@ -35,17 +35,16 @@ OSStatus recordingCallback(void *inRefCon,
     ListenerInfo *info = (ListenerInfo*) inRefCon;
     AudioUnit audioUnit = info->audioUnit;
     
-    AudioBufferList bufferList;
-    bufferList.mNumberBuffers = 1;
-    bufferList.mBuffers[0].mNumberChannels = 1;
-    bufferList.mBuffers[0].mData = NULL;
-    bufferList.mBuffers[0].mDataByteSize = inNumberFrames * sizeof(float) *2;
+    
+    AudioBufferList * bufferList = TPCircularBufferPrepareEmptyAudioBufferList(&circularBuffer, 1, inNumberFrames * sizeof(float), inTimeStamp);
+
     
     // render input and check for error
-    status = AudioUnitRender(audioUnit, ioActionFlags, inTimeStamp, inBusNumber, inNumberFrames, &bufferList);
+    status = AudioUnitRender(audioUnit, ioActionFlags, inTimeStamp, inBusNumber, inNumberFrames, bufferList);
     
     // stick the new input into the circular buffer, some other part of the app will pick it up there from another thread
-    TPCircularBufferProduceBytes(&circularBuffer,bufferList.mBuffers[0].mData,bufferList.mBuffers[0].mDataByteSize);
-    
+    if(status == noErr) {
+        TPCircularBufferProduceAudioBufferList(&circularBuffer, inTimeStamp);
+    }
     return noErr;
 }

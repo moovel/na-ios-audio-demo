@@ -10,7 +10,7 @@
 #define AudioListener_h
 
 #include <AudioToolbox/AudioToolbox.h>
-#include "../../Pods/TPCircularBuffer/TPCircularBuffer.h"
+#include "../../Pods/TPCircularBuffer/TPCircularBuffer+AudioBufferList.h"
 
 OSStatus recordingCallback(void *inRefCon,
                                   AudioUnitRenderActionFlags *ioActionFlags,

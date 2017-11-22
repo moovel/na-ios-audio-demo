@@ -13,7 +13,7 @@ class ViewController: UIViewController {
     private var toneGenerator = ToneGenerator(waveType: .squareInC)
     private var playing: Bool = false
     
-    private var listener = ToneListener()
+    private var listener = AudioListener()
     
     @IBOutlet weak var playButton: UIButton!
    
