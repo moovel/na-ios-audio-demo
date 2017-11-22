@@ -14,11 +14,15 @@ class ViewController: UIViewController {
     private var playing: Bool = false
     
     private var listener = AudioListener()
+    var displayLink:CADisplayLink?
     
     @IBOutlet weak var playButton: UIButton!
    
     @IBAction func playTapped(_ sender: Any) {
         if playing {
+            displayLink!.invalidate()
+            displayLink = nil;
+            
             playing = false
             toneGenerator.stop()
             listener.stop()
@@ -28,9 +32,37 @@ class ViewController: UIViewController {
             toneGenerator.start()
             listener.start()
             playButton.setTitle("Stop", for: .normal)
-
+            
+            if displayLink == nil {
+                displayLink = CADisplayLink.init(target: self, selector: #selector(updateData))
+            }
+            displayLink!.add(to: RunLoop.main, forMode: .defaultRunLoopMode)
         }
     }
+    
+    // this function gets called on the VSync interrupt of the display
+    // read the circular buffer
+    @objc func updateData(displayLink:CADisplayLink) {
+        var availableBytes: Int32 = 0
+        if circularBuffer.buffer != nil && circularBuffer.head != circularBuffer.tail {
+            let buffer: UnsafeMutableRawPointer = TPCircularBufferTail(&circularBuffer, &availableBytes)
+            //print("got an interrupt, \(availableBytes) available")
+            
+            // do something with the bytes in buffer
+            // https://stackoverflow.com/questions/38983277/how-to-get-bytes-out-of-an-unsafemutablerawpointer
+            buffer.bindMemory(to: Float.self, capacity: Int(availableBytes))
+            let floatbufptr = UnsafeBufferPointer(start: buffer.assumingMemoryBound(to: Float.self), count: Int(availableBytes / 4))
+            let floatarray = Array<Float>(floatbufptr)
+            for f: Float in floatarray {
+                //print("value: \(f)")
+            }
+            // now release the bytes we just read
+            TPCircularBufferConsume(&circularBuffer, availableBytes)
+        } else {
+            print("skipping a beat")
+        }
+    }
+        
     @IBAction func resetButtonTap(_ sender: Any) {
         frequency = 440.0
         frequencyLabel.text = String(format: "%.2f hz", frequency)
