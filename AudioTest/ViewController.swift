@@ -46,16 +46,19 @@ class ViewController: UIViewController {
         var availableBytes: Int32 = 0
         if circularBuffer.buffer != nil && circularBuffer.head != circularBuffer.tail {
             let buffer: UnsafeMutableRawPointer = TPCircularBufferTail(&circularBuffer, &availableBytes)
-            //print("got an interrupt, \(availableBytes) available")
+            //print("got an interrupt, \(availableBytes) available, \thead/tail: \(circularBuffer.head)/\(circularBuffer.tail)")
             
             // do something with the bytes in buffer
             // https://stackoverflow.com/questions/38983277/how-to-get-bytes-out-of-an-unsafemutablerawpointer
             buffer.bindMemory(to: Float.self, capacity: Int(availableBytes))
             let floatbufptr = UnsafeBufferPointer(start: buffer.assumingMemoryBound(to: Float.self), count: Int(availableBytes / 4))
             let floatarray = Array<Float>(floatbufptr)
-            for f: Float in floatarray {
-                //print("value: \(f)")
-            }
+            print("first float: \(floatarray[0])")
+//            for (index, value) in floatarray.enumerated() {
+//                if index % 10 == 0 {
+//                   // print(value)
+//                }
+//            }
             // now release the bytes we just read
             TPCircularBufferConsume(&circularBuffer, availableBytes)
         } else {
