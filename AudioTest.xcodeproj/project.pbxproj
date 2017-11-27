@@ -21,6 +21,8 @@
 		B6A689781FB4BF0800D95087 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6A689761FB4BF0800D95087 /* LaunchScreen.storyboard */; };
 		B6A689831FB4BF0800D95087 /* AudioTestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A689821FB4BF0800D95087 /* AudioTestTests.swift */; };
 		B6A689911FB4C17400D95087 /* ToneGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A689901FB4C17400D95087 /* ToneGenerator.swift */; };
+		B6C92EFC1FCB71630050E9BF /* OscilloscopeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C92EFB1FCB71630050E9BF /* OscilloscopeView.swift */; };
+		B6C92EFF1FCC5E890050E9BF /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6C92EFE1FCC5E880050E9BF /* CoreGraphics.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +64,8 @@
 		B6A6898F1FB4C03E00D95087 /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = System/Library/Frameworks/AudioUnit.framework; sourceTree = SDKROOT; };
 		B6A689901FB4C17400D95087 /* ToneGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToneGenerator.swift; sourceTree = "<group>"; };
 		B6A689921FB4C1B200D95087 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
+		B6C92EFB1FCB71630050E9BF /* OscilloscopeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OscilloscopeView.swift; sourceTree = "<group>"; };
+		B6C92EFE1FCC5E880050E9BF /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		E04BBDB52121FD64795FB3EC /* Pods_AudioTest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AudioTest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9133B5EC9BC683B714E0934 /* Pods-AudioTestTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AudioTestTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AudioTestTests/Pods-AudioTestTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -71,6 +75,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B6C92EFF1FCC5E890050E9BF /* CoreGraphics.framework in Frameworks */,
 				3E8FCD9F594FFA97B82FBEEE /* Pods_AudioTest.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -127,6 +132,7 @@
 				3CA6A9331FBCF41800C1C7AD /* AudioListener.swift */,
 				B63BBD0D1FB782BE00FD3FA4 /* AudioUnitCGlue.swift */,
 				B6A6896F1FB4BF0800D95087 /* ViewController.swift */,
+				B6C92EFB1FCB71630050E9BF /* OscilloscopeView.swift */,
 				B6A689711FB4BF0800D95087 /* Main.storyboard */,
 				B6A689741FB4BF0800D95087 /* Assets.xcassets */,
 				B6A689761FB4BF0800D95087 /* LaunchScreen.storyboard */,
@@ -149,6 +155,7 @@
 		B6A6898D1FB4C03E00D95087 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B6C92EFE1FCC5E880050E9BF /* CoreGraphics.framework */,
 				3CA6A9391FC352BA00C1C7AD /* TPCircularBuffer.framework */,
 				B6A689921FB4C1B200D95087 /* CoreAudio.framework */,
 				B6A6898E1FB4C03E00D95087 /* AudioToolbox.framework */,
@@ -393,6 +400,7 @@
 				B6A689911FB4C17400D95087 /* ToneGenerator.swift in Sources */,
 				3CA6A9341FBCF41800C1C7AD /* AudioListener.swift in Sources */,
 				B6A689701FB4BF0800D95087 /* ViewController.swift in Sources */,
+				B6C92EFC1FCB71630050E9BF /* OscilloscopeView.swift in Sources */,
 				B63BBD091FB65B8A00FD3FA4 /* CAudioUnit.c in Sources */,
 				B63BBD0E1FB782BE00FD3FA4 /* AudioUnitCGlue.swift in Sources */,
 				B63BBD0C1FB77C4700FD3FA4 /* PulseGenerator.c in Sources */,

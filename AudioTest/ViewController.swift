@@ -16,6 +16,7 @@ class ViewController: UIViewController {
     private var listener = AudioListener()
     var displayLink:CADisplayLink?
     
+    @IBOutlet weak var oscilloscopeView: OscilloscopeView!
     @IBOutlet weak var playButton: UIButton!
    
     @IBAction func playTapped(_ sender: Any) {
@@ -53,16 +54,14 @@ class ViewController: UIViewController {
             buffer.bindMemory(to: Float.self, capacity: Int(availableBytes))
             let floatbufptr = UnsafeBufferPointer(start: buffer.assumingMemoryBound(to: Float.self), count: Int(availableBytes / 4))
             let floatarray = Array<Float>(floatbufptr)
-            print("first float: \(floatarray[0])")
-//            for (index, value) in floatarray.enumerated() {
-//                if index % 10 == 0 {
-//                   // print(value)
-//                }
-//            }
+            //print("first float in swift: \(floatarray[0])")
             // now release the bytes we just read
+            oscilloscopeView.dataBuffer = floatarray
+            oscilloscopeView.setNeedsDisplay()
+            
             TPCircularBufferConsume(&circularBuffer, availableBytes)
         } else {
-            print("skipping a beat")
+           // print("skipping a beat")
         }
     }
         

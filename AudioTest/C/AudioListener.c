@@ -47,6 +47,8 @@ OSStatus recordingCallback(void *inRefCon,
     
     // stick the new input into the circular buffer, some other part of the app will pick it up there from another thread
     if(status == noErr) {
+        float first = ((float *)bufferList.mBuffers[0].mData)[0];
+        //printf("first float in C: %f\n", first);
         //TPCircularBufferProduceAudioBufferList(&circularBuffer, inTimeStamp);
         TPCircularBufferProduceBytes(&circularBuffer,bufferList.mBuffers[0].mData,bufferList.mBuffers[0].mDataByteSize);
     }
