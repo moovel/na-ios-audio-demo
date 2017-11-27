@@ -7,9 +7,13 @@
 //
 
 import UIKit
+import GLKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var glkView: GLKView!
+    private var glDelegate = GLOscilloscopeView()
+    
     private var toneGenerator = ToneGenerator(waveType: .squareInC)
     private var playing: Bool = false
     
@@ -55,16 +59,13 @@ class ViewController: UIViewController {
             let floatbufptr = UnsafeBufferPointer(start: buffer.assumingMemoryBound(to: Float.self), count: Int(availableBytes / 4))
             let floatarray = Array<Float>(floatbufptr)
             //print("first float in swift: \(floatarray[0])")
-            // now release the bytes we just read
             oscilloscopeView.dataBuffer = floatarray
-
-            // do the computation in a non-main thread
-            DispatchQueue.global(qos: .background).async {
-                self.oscilloscopeView.convertToPoints()
-                DispatchQueue.main.async {
-                    self.oscilloscopeView.setNeedsDisplay()
-                }
-            }
+            self.oscilloscopeView.setNeedsDisplay()
+            
+            //glDelegate.gldataBuffer = floatarray
+            //glkView.setNeedsDisplay()
+            
+            // now release the bytes we just read
             TPCircularBufferConsume(&circularBuffer, availableBytes)
         } else {
            // print("skipping a beat")
@@ -119,6 +120,10 @@ class ViewController: UIViewController {
         // get the wave type set up right off the bat
         self.waveSelectionChanged(self)
         frequencyLabel.text = String(format: "%.2f hz", frequency)
+        
+        glkView.context = EAGLContext(api: .openGLES3 )!
+        glkView.delegate = glDelegate
+        
     }
 
     override func didReceiveMemoryWarning() {

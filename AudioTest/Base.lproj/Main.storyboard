@@ -58,11 +58,17 @@
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xx9-0j-wjI" customClass="OscilloscopeView" customModule="AudioTest" customModuleProvider="target">
                                 <rect key="frame" x="16" y="50" width="343" height="128"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" red="0.91693652849740936" green="0.91693652849740936" blue="0.91693652849740936" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="128" id="m6m-tn-ffW"/>
                                 </constraints>
                             </view>
+                            <glkView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" enableSetNeedsDisplay="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NSA-NS-qzq">
+                                <rect key="frame" x="16" y="203" width="343" height="128"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="128" id="P1w-nV-nWT"/>
+                                </constraints>
+                            </glkView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -72,24 +78,28 @@
                             <constraint firstItem="n2k-3O-l8w" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Dnf-rX-U9d"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Xx9-0j-wjI" secondAttribute="trailing" constant="16" id="IZv-yu-g4x"/>
                             <constraint firstItem="n2k-3O-l8w" firstAttribute="top" secondItem="ObD-f6-ZKH" secondAttribute="bottom" constant="34" id="J8f-n5-Afz"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="NSA-NS-qzq" secondAttribute="trailing" constant="16" id="MKh-Ag-mZN"/>
                             <constraint firstItem="ltg-IN-bT5" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="60" id="Q5c-TK-knr"/>
                             <constraint firstItem="Xx9-0j-wjI" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="30" id="QyH-o5-YZV"/>
                             <constraint firstItem="ltg-IN-bT5" firstAttribute="top" secondItem="n2k-3O-l8w" secondAttribute="bottom" constant="42" id="RXx-JI-drx"/>
                             <constraint firstItem="VeR-tJ-w2K" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="541" id="SqT-jk-Lc5"/>
                             <constraint firstItem="VeR-tJ-w2K" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="60" id="VJU-sG-Aiw"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="VDV-jx-7iM" secondAttribute="bottom" constant="20" id="W6P-9Y-IUS"/>
+                            <constraint firstItem="NSA-NS-qzq" firstAttribute="top" secondItem="Xx9-0j-wjI" secondAttribute="bottom" constant="25" id="bxb-Vg-2GP"/>
                             <constraint firstItem="ObD-f6-ZKH" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="dmB-bQ-YDw"/>
                             <constraint firstItem="Xx9-0j-wjI" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="h2V-MO-Jhf"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ltg-IN-bT5" secondAttribute="trailing" constant="60" id="uOo-F9-MtW"/>
                             <constraint firstItem="VDV-jx-7iM" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="100" id="vZU-OW-M2u"/>
                             <constraint firstItem="ltg-IN-bT5" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="yVY-37-7zq"/>
                             <constraint firstAttribute="trailing" secondItem="VeR-tJ-w2K" secondAttribute="trailing" constant="60" id="yeP-TA-sC4"/>
+                            <constraint firstItem="NSA-NS-qzq" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="zaS-4Q-9hM"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
                         <outlet property="frequencyLabel" destination="VeR-tJ-w2K" id="BQG-ut-EUm"/>
                         <outlet property="frequencySlider" destination="ltg-IN-bT5" id="5VC-xV-hmt"/>
+                        <outlet property="glkView" destination="NSA-NS-qzq" id="dJf-nS-e43"/>
                         <outlet property="oscilloscopeView" destination="Xx9-0j-wjI" id="a3L-4r-EBN"/>
                         <outlet property="playButton" destination="ObD-f6-ZKH" id="Pc5-Hl-My3"/>
                         <outlet property="waveSelector" destination="n2k-3O-l8w" id="uFw-lU-Nj1"/>

@@ -16,9 +16,8 @@ class OscilloscopeView : UIView {
     public var amplitudeCorrection = CGFloat(1000.0)
     var pointArray = [CGPoint](repeating: CGPoint(), count: 4096)
     
-    public func convertToPoints() {
+    public func convertToPointsInRect(_ rect: CGRect) {
         guard let inData = dataBuffer else {return}
-        let rect = self.frame
         let cgwidth = rect.width
         let cgheight = rect.height
         let cgcount = CGFloat(min(inData.count,pointArray.count))
@@ -36,18 +35,21 @@ class OscilloscopeView : UIView {
             let y = ampedUp + (cgheight/2.0)
             // now figure the x coord
             let x = CGFloat(index) * (cgwidth/cgcount)
-            pointArray[index].x = x
-            pointArray[index].y = y
-            //pointArray[index] = CGPoint(x: Double(x), y: Double(y))
+            //pointArray[index].x = x
+            //pointArray[index].y = y
+            pointArray[index] = CGPoint(x: Double(x), y: Double(y))
         }
     }
     
     override func draw(_ rect: CGRect) {
         //print("draw in rect, length: \(dataBuffer?.count ?? 0)")
         guard let inData = dataBuffer else {return}
+        self.convertToPointsInRect(rect)
         
         if let context = UIGraphicsGetCurrentContext() {
+            context.setShouldAntialias(false)
             context.setFillColor(UIColor.black.cgColor)
+            context.beginPath()
             for (index, element) in pointArray.enumerated() {
                 if index == 0 {
                     context.move(to: element)
