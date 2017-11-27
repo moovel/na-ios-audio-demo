@@ -47,6 +47,7 @@ class OscilloscopeView : UIView {
         self.convertToPointsInRect(rect)
         
         if let context = UIGraphicsGetCurrentContext() {
+            context.setLineWidth(1.0)
             context.setShouldAntialias(false)
             context.setFillColor(UIColor.black.cgColor)
             context.beginPath()
@@ -60,7 +61,7 @@ class OscilloscopeView : UIView {
                 }
                 context.addLine(to: element)
             }
-            context.drawPath(using: .stroke)
+            context.strokePath()
         }
     }
 }
