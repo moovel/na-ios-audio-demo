@@ -13,25 +13,33 @@ import CoreGraphics
 class OscilloscopeView : UIView {
  
     public var dataBuffer: Array<Float>? = nil
-    public var amplitudeCorrection = Float(1000.0)
+    public var amplitudeCorrection = CGFloat(1000.0)
     var pointArray = [CGPoint](repeating: CGPoint(), count: 4096)
     
     override func draw(_ rect: CGRect) {
         //print("draw in rect, length: \(dataBuffer?.count ?? 0)")
         guard let inData = dataBuffer else {return}
         
-        let fwidth = Float(rect.width)
-        let fheight = Float(rect.height)
-        let fcount = Float(inData.count)
+        let cgwidth = rect.width
+        let cgheight = rect.height
+        let cgcount = CGFloat(min(inData.count,pointArray.count))
+        let inDataCGFloat = inData.map{CGFloat($0)}
+
         // convert array of floats to array of CGPoint
-        for (index, element) in inData.enumerated() {
+        for (index, element) in inDataCGFloat.enumerated() {
+            if index >= pointArray.count {
+                break
+            }
+            
             // add some amplitude
             let ampedUp = element * amplitudeCorrection
            // first add the offset to put 0 at the midpoint, vertically, in the window
-           let y = ampedUp + (fheight/2.0)
+           let y = ampedUp + (cgheight/2.0)
            // now figure the x coord
-            let x = Float(index) * (fwidth/fcount)
-            pointArray[index] = CGPoint(x: Double(x), y: Double(y))
+            let x = CGFloat(index) * (cgwidth/cgcount)
+            pointArray[index].x = x
+            pointArray[index].y = y
+            //pointArray[index] = CGPoint(x: Double(x), y: Double(y))
         }
         
         if let context = UIGraphicsGetCurrentContext() {
