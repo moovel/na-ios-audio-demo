@@ -57,8 +57,14 @@ class ViewController: UIViewController {
             //print("first float in swift: \(floatarray[0])")
             // now release the bytes we just read
             oscilloscopeView.dataBuffer = floatarray
-            oscilloscopeView.setNeedsDisplay()
-            
+
+            // do the computation in a non-main thread
+            DispatchQueue.global(qos: .background).async {
+                self.oscilloscopeView.convertToPoints()
+                DispatchQueue.main.async {
+                    self.oscilloscopeView.setNeedsDisplay()
+                }
+            }
             TPCircularBufferConsume(&circularBuffer, availableBytes)
         } else {
            // print("skipping a beat")
