@@ -14,30 +14,35 @@ class OscilloscopeView : UIView {
  
     public var dataBuffer: Array<Float>? = nil
     public var amplitudeCorrection = CGFloat(1000.0)
-    var pointArray = [CGPoint](repeating: CGPoint(), count: 2048)
+    let pointArraySize = 512
+    // fixed size array of points that we will plot
+    var pointArray = [CGPoint](repeating: CGPoint(), count: 512)
     
     public func convertToPointsInRect(_ rect: CGRect) {
         guard let inData = dataBuffer else {return}
         let cgwidth = rect.width
         let cgheight = rect.height
-        let cgcount = CGFloat(min(inData.count,pointArray.count))
         let inDataCGFloat = inData.map{CGFloat($0)}
 
+        let stride = inData.count / 512
+        var pointIndex = 0
+        
         // convert array of floats to array of CGPoint
         for (index, element) in inDataCGFloat.enumerated() {
-            if index >= pointArray.count {
-                break
+            // we only want every nth element of the source array,
+            // typically we are using less than all of the data points so that our performance won't suck
+            if index % stride != 0 {
+                continue
             }
             
             // add some amplitude
             let ampedUp = element * amplitudeCorrection
-            // first add the offset to put 0 at the midpoint, vertically, in the window
+            //  add the offset to put 0 at the midpoint, vertically, in the window
             let y = ampedUp + (cgheight/2.0)
             // now figure the x coord
-            let x = CGFloat(index) * (cgwidth/cgcount)
-            //pointArray[index].x = x
-            //pointArray[index].y = y
-            pointArray[index] = CGPoint(x: Double(x), y: Double(y))
+            let x = CGFloat(pointIndex) * (cgwidth/512)
+            pointArray[pointIndex] = CGPoint(x: Double(x), y: Double(y))
+            pointIndex = pointIndex + 1
         }
     }
     
