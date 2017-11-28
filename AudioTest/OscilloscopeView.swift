@@ -13,7 +13,7 @@ import CoreGraphics
 class OscilloscopeView : UIView {
  
     public var dataBuffer: Array<Float>? = nil
-    public var amplitudeCorrection = CGFloat(1000.0)
+    public var amplitudeCorrection = CGFloat(2000.0)
     let pointArraySize = 512
     // fixed size array of points that we will plot
     var pointArray = [CGPoint](repeating: CGPoint(), count: 512)

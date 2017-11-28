@@ -63,6 +63,18 @@
                                     <constraint firstAttribute="height" constant="128" id="m6m-tn-ffW"/>
                                 </constraints>
                             </view>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="2000" minValue="1" maxValue="20000" translatesAutoresizingMaskIntoConstraints="NO" id="bhV-tx-GMx">
+                                <rect key="frame" x="98" y="186" width="263" height="31"/>
+                                <connections>
+                                    <action selector="gainSliderValueChange:" destination="BYZ-38-t0r" eventType="valueChanged" id="rfS-tm-Q74"/>
+                                </connections>
+                            </slider>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gain" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MDr-Ov-3wj">
+                                <rect key="frame" x="16" y="191" width="35" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -72,6 +84,7 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="VeR-tJ-w2K" secondAttribute="trailing" constant="60" id="6fq-vT-Bdr"/>
                             <constraint firstItem="VeR-tJ-w2K" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="60" id="CyH-rJ-1y8"/>
                             <constraint firstItem="n2k-3O-l8w" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Dnf-rX-U9d"/>
+                            <constraint firstItem="MDr-Ov-3wj" firstAttribute="top" secondItem="Xx9-0j-wjI" secondAttribute="bottom" constant="13" id="GG3-Jd-YBf"/>
                             <constraint firstItem="n2k-3O-l8w" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="60" id="GOw-5B-76x"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Xx9-0j-wjI" secondAttribute="trailing" constant="16" id="IZv-yu-g4x"/>
                             <constraint firstItem="ltg-IN-bT5" firstAttribute="top" secondItem="n2k-3O-l8w" secondAttribute="bottom" constant="34" id="MED-WR-eha"/>
@@ -83,14 +96,18 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ObD-f6-ZKH" secondAttribute="trailing" constant="100" id="Xim-5R-5ru"/>
                             <constraint firstItem="VeR-tJ-w2K" firstAttribute="top" secondItem="n2k-3O-l8w" secondAttribute="bottom" constant="8" id="YM3-Qs-4W3"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="n2k-3O-l8w" secondAttribute="trailing" constant="60" id="Zaw-ae-H48"/>
+                            <constraint firstItem="bhV-tx-GMx" firstAttribute="top" secondItem="Xx9-0j-wjI" secondAttribute="bottom" constant="8" id="b7V-Pd-Nbg"/>
                             <constraint firstItem="ObD-f6-ZKH" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="bu0-Yy-iu9"/>
                             <constraint firstItem="ObD-f6-ZKH" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="dmB-bQ-YDw"/>
+                            <constraint firstItem="MDr-Ov-3wj" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="fwK-Rw-atR"/>
                             <constraint firstItem="Xx9-0j-wjI" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="h2V-MO-Jhf"/>
                             <constraint firstItem="ObD-f6-ZKH" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="100" id="hw0-4d-JMF"/>
                             <constraint firstItem="n2k-3O-l8w" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="60" id="lHU-Ye-DrS"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="bhV-tx-GMx" secondAttribute="trailing" constant="16" id="qAA-iZ-DBL"/>
                             <constraint firstItem="VDV-jx-7iM" firstAttribute="top" secondItem="ltg-IN-bT5" secondAttribute="bottom" constant="8" id="qug-Ok-2AK"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ltg-IN-bT5" secondAttribute="trailing" constant="60" id="uOo-F9-MtW"/>
                             <constraint firstItem="VDV-jx-7iM" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="100" id="vZU-OW-M2u"/>
+                            <constraint firstItem="bhV-tx-GMx" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="100" id="wOu-oK-6dx"/>
                             <constraint firstItem="ltg-IN-bT5" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="yVY-37-7zq"/>
                             <constraint firstAttribute="trailing" secondItem="VeR-tJ-w2K" secondAttribute="trailing" constant="60" id="yeP-TA-sC4"/>
                         </constraints>
@@ -99,6 +116,7 @@
                     <connections>
                         <outlet property="frequencyLabel" destination="VeR-tJ-w2K" id="BQG-ut-EUm"/>
                         <outlet property="frequencySlider" destination="ltg-IN-bT5" id="5VC-xV-hmt"/>
+                        <outlet property="gainSlider" destination="bhV-tx-GMx" id="0fy-gN-Ihc"/>
                         <outlet property="oscilloscopeView" destination="Xx9-0j-wjI" id="a3L-4r-EBN"/>
                         <outlet property="playButton" destination="ObD-f6-ZKH" id="Pc5-Hl-My3"/>
                         <outlet property="waveSelector" destination="n2k-3O-l8w" id="uFw-lU-Nj1"/>

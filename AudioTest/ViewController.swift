@@ -51,7 +51,12 @@ class ViewController: UIViewController {
         frequencySlider.value = Float(frequency)
         self.waveSelectionChanged(self)
     }
+    @IBOutlet weak var gainSlider: UISlider!
     
+    @IBAction func gainSliderValueChange(_ sender: Any) {
+        let newValue = gainSlider.value
+        oscilloscopeView.amplitudeCorrection = CGFloat(newValue)
+    }
     @IBOutlet weak var frequencyLabel: UILabel!
     @IBOutlet weak var waveSelector: UISegmentedControl!
     @IBAction func waveSelectionChanged(_ sender: Any) {
