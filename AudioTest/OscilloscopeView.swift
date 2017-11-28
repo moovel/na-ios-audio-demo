@@ -24,7 +24,7 @@ class OscilloscopeView : UIView {
         let cgheight = rect.height
         let inDataCGFloat = inData.map{CGFloat($0)}
 
-        let stride = inData.count / 512
+        let stride = max(1, inData.count / 512)
         var pointIndex = 0
         
         // convert array of floats to array of CGPoint
@@ -33,6 +33,10 @@ class OscilloscopeView : UIView {
             // typically we are using less than all of the data points so that our performance won't suck
             if index % stride != 0 {
                 continue
+            }
+            
+            if pointIndex >= pointArray.count {
+                break
             }
             
             // add some amplitude
