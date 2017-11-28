@@ -167,7 +167,7 @@ class AudioListener {
                 }
                 if micPermission == false { return }
                 
-                try audioSession.setCategory(AVAudioSessionCategoryRecord)
+                try audioSession.setCategory(AVAudioSessionCategoryPlayAndRecord)
                 // choose 44100 or 48000 based on hardware rate
                 // sampleRate = 44100.0
                 var preferredIOBufferDuration = 0.0058      // 5.8 milliseconds = 256 samples

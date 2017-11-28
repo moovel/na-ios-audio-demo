@@ -14,7 +14,7 @@ class OscilloscopeView : UIView {
  
     public var dataBuffer: Array<Float>? = nil
     public var amplitudeCorrection = CGFloat(1000.0)
-    var pointArray = [CGPoint](repeating: CGPoint(), count: 4096)
+    var pointArray = [CGPoint](repeating: CGPoint(), count: 2048)
     
     public func convertToPointsInRect(_ rect: CGRect) {
         guard let inData = dataBuffer else {return}
@@ -57,7 +57,6 @@ class OscilloscopeView : UIView {
                 }
                 if index >= inData.count {
                     break
-                    
                 }
                 context.addLine(to: element)
             }

@@ -11,8 +11,8 @@ import GLKit
 
 class ViewController: UIViewController {
 
-    @IBOutlet weak var glkView: GLKView!
-    private var glDelegate = GLOscilloscopeView()
+    //@IBOutlet weak var glkView: GLKView!
+    //private var glDelegate = GLOscilloscopeView()
     
     private var toneGenerator = ToneGenerator(waveType: .squareInC)
     private var playing: Bool = false
@@ -34,41 +34,14 @@ class ViewController: UIViewController {
             playButton.setTitle("Play", for: .normal)
         } else {
             playing = true
-            toneGenerator.start()
             listener.start()
+            toneGenerator.start()
             playButton.setTitle("Stop", for: .normal)
             
             if displayLink == nil {
                 displayLink = CADisplayLink.init(target: self, selector: #selector(updateData))
             }
             displayLink!.add(to: RunLoop.main, forMode: .defaultRunLoopMode)
-        }
-    }
-    
-    // this function gets called on the VSync interrupt of the display
-    // read the circular buffer
-    @objc func updateData(displayLink:CADisplayLink) {
-        var availableBytes: Int32 = 0
-        if circularBuffer.buffer != nil && circularBuffer.head != circularBuffer.tail {
-            let buffer: UnsafeMutableRawPointer = TPCircularBufferTail(&circularBuffer, &availableBytes)
-            //print("got an interrupt, \(availableBytes) available, \thead/tail: \(circularBuffer.head)/\(circularBuffer.tail)")
-            
-            // do something with the bytes in buffer
-            // https://stackoverflow.com/questions/38983277/how-to-get-bytes-out-of-an-unsafemutablerawpointer
-            buffer.bindMemory(to: Float.self, capacity: Int(availableBytes))
-            let floatbufptr = UnsafeBufferPointer(start: buffer.assumingMemoryBound(to: Float.self), count: Int(availableBytes / 4))
-            let floatarray = Array<Float>(floatbufptr)
-            //print("first float in swift: \(floatarray[0])")
-            oscilloscopeView.dataBuffer = floatarray
-            self.oscilloscopeView.setNeedsDisplay()
-            
-            //glDelegate.gldataBuffer = floatarray
-            //glkView.setNeedsDisplay()
-            
-            // now release the bytes we just read
-            TPCircularBufferConsume(&circularBuffer, availableBytes)
-        } else {
-           // print("skipping a beat")
         }
     }
         
@@ -121,8 +94,8 @@ class ViewController: UIViewController {
         self.waveSelectionChanged(self)
         frequencyLabel.text = String(format: "%.2f hz", frequency)
         
-        glkView.context = EAGLContext(api: .openGLES3 )!
-        glkView.delegate = glDelegate
+        //glkView.context = EAGLContext(api: .openGLES3 )!
+        //glkView.delegate = glDelegate
         
     }
 
@@ -131,6 +104,32 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    // this function gets called on the VSync interrupt of the display
+    // read the circular buffer
+    @objc func updateData(displayLink:CADisplayLink) {
+        var availableBytes: Int32 = 0
+        if circularBuffer.buffer != nil && circularBuffer.head != circularBuffer.tail {
+            let buffer: UnsafeMutableRawPointer = TPCircularBufferTail(&circularBuffer, &availableBytes)
+            //print("got an interrupt, \(availableBytes) available, \thead/tail: \(circularBuffer.head)/\(circularBuffer.tail)")
+            
+            // do something with the bytes in buffer
+            // https://stackoverflow.com/questions/38983277/how-to-get-bytes-out-of-an-unsafemutablerawpointer
+            buffer.bindMemory(to: Float.self, capacity: Int(availableBytes))
+            let floatbufptr = UnsafeBufferPointer(start: buffer.assumingMemoryBound(to: Float.self), count: Int(availableBytes / 4))
+            let floatarray = Array<Float>(floatbufptr)
+            //print("first float in swift: \(floatarray[0])")
+            oscilloscopeView.dataBuffer = floatarray
+            self.oscilloscopeView.setNeedsDisplay()
+            
+            //glDelegate.gldataBuffer = floatarray
+            //glkView.setNeedsDisplay()
+            
+            // now release the bytes we just read
+            TPCircularBufferConsume(&circularBuffer, availableBytes)
+        } else {
+            // print("skipping a beat")
+        }
+    }
 
 }
 

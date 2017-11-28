@@ -138,13 +138,13 @@
 				B63BBD0D1FB782BE00FD3FA4 /* AudioUnitCGlue.swift */,
 				B6A6896F1FB4BF0800D95087 /* ViewController.swift */,
 				B6C92EFB1FCB71630050E9BF /* OscilloscopeView.swift */,
+				3CEC7E911FCCBD79004B0AEB /* GLOscilloscopeView.swift */,
 				B6A689711FB4BF0800D95087 /* Main.storyboard */,
 				B6A689741FB4BF0800D95087 /* Assets.xcassets */,
 				B6A689761FB4BF0800D95087 /* LaunchScreen.storyboard */,
 				B6A689791FB4BF0800D95087 /* Info.plist */,
 				B6A6896D1FB4BF0800D95087 /* AppDelegate.swift */,
 				B63BBD061FB65B8A00FD3FA4 /* AudioTest-Bridging-Header.h */,
-				3CEC7E911FCCBD79004B0AEB /* GLOscilloscopeView.swift */,
 			);
 			path = AudioTest;
 			sourceTree = "<group>";
