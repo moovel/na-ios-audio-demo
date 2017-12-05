@@ -16,11 +16,29 @@ class ViewController: UIViewController {
     
     private var toneGenerator = ToneGenerator(waveType: .squareInC)
     private var playing: Bool = false
+    private var listening: Bool = false
     
     private var listener = AudioListener()
     var displayLink:CADisplayLink?
     
     @IBOutlet weak var oscilloscopeView: OscilloscopeView!
+    
+    @IBAction func listenButtonTapped(_ sender: Any) {
+        if listening {
+            // stop listening
+            listener.stop()
+            listening = false
+            listenButton.setTitle("Listen", for: .normal)
+        } else {
+            // start listening
+            listener.start()
+            listening = true
+            listenButton.setTitle("Stop", for: .normal)
+        }
+    }
+    @IBOutlet weak var listenButton: UIButton!
+    
+    
     @IBOutlet weak var playButton: UIButton!
    
     @IBAction func playTapped(_ sender: Any) {
@@ -30,11 +48,9 @@ class ViewController: UIViewController {
             
             playing = false
             toneGenerator.stop()
-            listener.stop()
             playButton.setTitle("Play", for: .normal)
         } else {
             playing = true
-            listener.start()
             toneGenerator.start()
             playButton.setTitle("Stop", for: .normal)
             

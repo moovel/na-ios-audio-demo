@@ -10,7 +10,6 @@
 		0F9260D16CC3FCA02E1020EE /* Pods_AudioTestTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A63A0644E046898347870864 /* Pods_AudioTestTests.framework */; };
 		3CA6A9341FBCF41800C1C7AD /* AudioListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA6A9331FBCF41800C1C7AD /* AudioListener.swift */; };
 		3CA6A9371FC3458200C1C7AD /* AudioListener.c in Sources */ = {isa = PBXBuildFile; fileRef = 3CA6A9351FC3458200C1C7AD /* AudioListener.c */; };
-		3CEC7E921FCCBD79004B0AEB /* GLOscilloscopeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CEC7E911FCCBD79004B0AEB /* GLOscilloscopeView.swift */; };
 		3CEC7E941FCCBD9D004B0AEB /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CEC7E931FCCBD9D004B0AEB /* GLKit.framework */; };
 		3E8FCD9F594FFA97B82FBEEE /* Pods_AudioTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E04BBDB52121FD64795FB3EC /* Pods_AudioTest.framework */; };
 		B63BBD091FB65B8A00FD3FA4 /* CAudioUnit.c in Sources */ = {isa = PBXBuildFile; fileRef = B63BBD081FB65B8A00FD3FA4 /* CAudioUnit.c */; };
@@ -44,7 +43,6 @@
 		3CA6A9351FC3458200C1C7AD /* AudioListener.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = AudioListener.c; sourceTree = "<group>"; };
 		3CA6A9361FC3458200C1C7AD /* AudioListener.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioListener.h; sourceTree = "<group>"; };
 		3CA6A9391FC352BA00C1C7AD /* TPCircularBuffer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = TPCircularBuffer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		3CEC7E911FCCBD79004B0AEB /* GLOscilloscopeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GLOscilloscopeView.swift; sourceTree = "<group>"; };
 		3CEC7E931FCCBD9D004B0AEB /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		444CFB06284035CA99B043B3 /* Pods-AudioTest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AudioTest.release.xcconfig"; path = "Pods/Target Support Files/Pods-AudioTest/Pods-AudioTest.release.xcconfig"; sourceTree = "<group>"; };
 		A63A0644E046898347870864 /* Pods_AudioTestTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AudioTestTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -138,7 +136,6 @@
 				B63BBD0D1FB782BE00FD3FA4 /* AudioUnitCGlue.swift */,
 				B6A6896F1FB4BF0800D95087 /* ViewController.swift */,
 				B6C92EFB1FCB71630050E9BF /* OscilloscopeView.swift */,
-				3CEC7E911FCCBD79004B0AEB /* GLOscilloscopeView.swift */,
 				B6A689711FB4BF0800D95087 /* Main.storyboard */,
 				B6A689741FB4BF0800D95087 /* Assets.xcassets */,
 				B6A689761FB4BF0800D95087 /* LaunchScreen.storyboard */,
@@ -407,7 +404,6 @@
 				B6A689911FB4C17400D95087 /* ToneGenerator.swift in Sources */,
 				3CA6A9341FBCF41800C1C7AD /* AudioListener.swift in Sources */,
 				B6A689701FB4BF0800D95087 /* ViewController.swift in Sources */,
-				3CEC7E921FCCBD79004B0AEB /* GLOscilloscopeView.swift in Sources */,
 				B6C92EFC1FCB71630050E9BF /* OscilloscopeView.swift in Sources */,
 				B63BBD091FB65B8A00FD3FA4 /* CAudioUnit.c in Sources */,
 				B63BBD0E1FB782BE00FD3FA4 /* AudioUnitCGlue.swift in Sources */,
