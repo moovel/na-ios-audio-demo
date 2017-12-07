@@ -51,25 +51,18 @@ class OscilloscopeView : UIView {
     }
     
     override func draw(_ rect: CGRect) {
-        //print("draw in rect, length: \(dataBuffer?.count ?? 0)")
         guard let inData = dataBuffer else {return}
         self.convertToPointsInRect(rect)
-        
-        if let context = UIGraphicsGetCurrentContext() {
-            context.setLineWidth(1.0)
-            context.setShouldAntialias(false)
-            context.setFillColor(UIColor.black.cgColor)
-            context.beginPath()
-            for (index, element) in pointArray.enumerated() {
-                if index == 0 {
-                    context.move(to: element)
-                }
-                if index >= inData.count {
-                    break
-                }
-                context.addLine(to: element)
+        let bezierPath = UIBezierPath()
+        for (index, element) in pointArray.enumerated() {
+            if index == 0 {
+                bezierPath.move(to: element)
             }
-            context.strokePath()
+            if index >= inData.count {
+                break
+            }
+            bezierPath.addLine(to: element)
         }
+        bezierPath.stroke()
     }
 }
